@@ -3,8 +3,12 @@ package com.lmy.androidutilcode.base
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.lmy.BaseApplication
+import com.lmy.androidutilcode.util.ScreenAdaptationUtil
+import com.upuphone.cloudservice.annotation.PageId
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -12,51 +16,67 @@ import java.lang.reflect.ParameterizedType
  * @author：Mengyue.Liu
  * @time： 2022/5/10 11:26
  */
-abstract class BaseVMActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(), BaseBinding<V> {
+abstract class BaseVMActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
     
+    protected lateinit var binding: V
     protected lateinit var viewModel: VM
     
-    protected val binding: V by lazy(mode = LazyThreadSafetyMode.NONE) {
-        getViewBinding(layoutInflater)
+    /**
+     * 获取页面唯一标记ID，用于做页面数据缓存
+     */
+    private fun getPageId(): String {
+        val cls: Class<*> = this.javaClass
+        if (cls.isAnnotationPresent(PageId::class.java)) {
+            val annotation: PageId = cls.getAnnotation(PageId::class.java)
+            return annotation.value
+        }
+        return cls.simpleName
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        createViewModel()
-        binding.setVariable(initVariableId(), viewModel)
-        binding.lifecycleOwner = this
-        binding.initView()
-        binding.initData()
-    }
-    
-    // 初始化viewModelId
-    abstract fun initVariableId(): Int
-    
-    // 创建viewModel
-    private fun createViewModel() {
-        val modelClass: Class<BaseViewModel>
-        val type = javaClass.genericSuperclass
-        modelClass = if (type is ParameterizedType) {
-            type.actualTypeArguments[1] as Class<BaseViewModel>
-        } else {
-            BaseViewModel::class.java
-        }
-        viewModel = ViewModelProvider(this).get(modelClass) as VM
-    }
-    
-    // 通过反射获取ViewDataBinding
-    private fun <V : ViewDataBinding> Any.getViewBinding(inflater: LayoutInflater): V {
-        // 拿到想要的ViewDataBinding
-        val vbClass = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments.filterIsInstance<Class<V>>()
-        // 拿到inflate方法
-        val inflate = vbClass[0].getDeclaredMethod("inflate", LayoutInflater::class.java)
-        // 调用ViewDataBinding的inflate方法获取对应的ViewDataBinding对象
-        return inflate.invoke(null, inflater) as V
+        // 屏幕适配
+        ScreenAdaptationUtil.setDensityByWidth(this, BaseApplication.instance)
+        initDataBinding()
+        initData()
     }
     
     override fun onDestroy() {
         super.onDestroy()
         binding.unbind()
     }
+    
+    private fun initDataBinding() {
+        binding = DataBindingUtil.setContentView(this, getLayoutId())
+        createViewModel()
+        binding.setVariable(initVariableId(), viewModel)
+        binding.lifecycleOwner = this
+    }
+    
+    protected fun createViewModel() {
+        val modelClass: Class<BaseViewModel>
+        val type = javaClass.genericSuperclass
+        modelClass = if (type is ParameterizedType) {
+            type.actualTypeArguments[1] as Class<BaseViewModel>
+        } else {
+            // 如果没有指定泛型参数，则默认使用BaseViewModel
+            BaseViewModel::class.java
+        }
+        viewModel = ViewModelProvider(this).get(modelClass) as VM
+        viewModel.setCacheKey(getPageId())
+    }
+    
+    /**
+     * 获取布局id
+     * @return Int
+     */
+    abstract fun getLayoutId(): Int
+    
+    /**
+     * 初始化ViewModel的id
+     * @return Int
+     */
+    abstract fun initVariableId(): Int
+    
+    abstract fun initData()
 }

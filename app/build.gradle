@@ -17,6 +17,21 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        debug {
+            keyAlias "android"
+            keyPassword "123Qwerty"
+            storeFile file("platform-android.jks")
+            storePassword "123Qwerty"
+        }
+        release {
+            storeFile file("platform.keystore")
+            storePassword 'android'
+            keyAlias 'platform'
+            keyPassword 'android'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -48,4 +63,6 @@ dependencies {
     //androidUtilCode
     implementation 'com.blankj:utilcodex:1.31.0'
     implementation project(path: ':base')
+
+    implementation 'cn.trinea.android.common:trinea-android-common:4.2.15'
 }

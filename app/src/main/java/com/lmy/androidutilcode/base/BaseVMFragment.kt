@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,28 +15,38 @@ import java.lang.reflect.ParameterizedType
  * @author：Mengyue.Liu
  * @time： 2022/5/10 11:26
  */
-abstract class BaseVMFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment(), BaseBinding<V> {
+abstract class BaseVMFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragment() {
+    
     protected lateinit var binding: V
-        private set
     protected lateinit var viewModel: VM
     
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = getViewBinding(layoutInflater, container)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
         return binding.root
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initDataBinding()
+        initData()
+    }
+    
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.unbind()
+    }
+    
+    private fun initDataBinding() {
         createViewModel()
         binding.setVariable(initVariableId(), viewModel)
         binding.lifecycleOwner = this
-        binding.initView()
-        binding.initData()
     }
     
-    abstract fun initVariableId(): Int
-    
-    private fun createViewModel() {
+    protected fun createViewModel() {
         val modelClass: Class<BaseViewModel>
         val type = javaClass.genericSuperclass
         modelClass = if (type is ParameterizedType) {
@@ -47,17 +58,11 @@ abstract class BaseVMFragment<V : ViewDataBinding, VM : BaseViewModel> : Fragmen
         viewModel = ViewModelProvider(this).get(modelClass) as VM
     }
     
-    private fun <VB : ViewDataBinding> Any.getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB {
-        val vbClass = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments.filterIsInstance<Class<VB>>()
-        val inflate = vbClass[0].getDeclaredMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
-        return inflate.invoke(null, inflater, container, false) as VB
-    }
+    abstract fun getLayoutId(): Int
     
-    override fun onDestroy() {
-        super.onDestroy()
-        // 取消绑定
-        if (::binding.isInitialized) {
-            binding.unbind()
-        }
-    }
+    abstract fun initVariableId(): Int
+    
+    abstract fun initData()
+    
+    
 }

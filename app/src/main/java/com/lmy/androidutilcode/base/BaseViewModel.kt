@@ -9,5 +9,14 @@ import androidx.lifecycle.AndroidViewModel
  * @time： 2022/5/11 14:30
  */
 open class BaseViewModel(app:Application) : AndroidViewModel(app) {
-
+    
+    lateinit var cachedKey: String
+    
+    /**
+     * 设置页面缓存数据唯一key
+     */
+    fun setCacheKey(key: String) {
+        this.cachedKey = key
+    }
+    
 }
