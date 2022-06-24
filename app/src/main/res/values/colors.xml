@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent_color">#00000000</color>
+    <color name="color_F3F3F5">#F3F3F5</color>
+    <color name="district_phone_divider_color">#0D000000</color>
+    <color name="district_phone_item_bg_color">#DEE4FF</color>
 </resources>

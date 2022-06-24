@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.lmy.androidutilcode.bean.DistrictPhoneItemBean" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:gravity="center|left"
+            android:singleLine="true"
+            android:text="@{@string/district_phone_info_text(item.cn,item.code)}"
+            android:textColor="#ff000000"
+            android:textSize="16sp" />
+    </LinearLayout>
+</layout>

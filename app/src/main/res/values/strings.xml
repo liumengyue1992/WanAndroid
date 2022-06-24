@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidUtilCode</string>
+    <string name="select_district_phone_text">选择国家/地区</string>
+    <string name="district_phone_info_text">%1$s (+%2$s)</string>
 </resources>

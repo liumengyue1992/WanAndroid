@@ -1,6 +1,5 @@
 package com.lmy.uitl
 
-import android.content.Context
 import android.widget.Toast
 import com.lmy.BaseApplication
 
@@ -16,11 +15,11 @@ import com.lmy.BaseApplication
 object ToastUtil {
 
     fun showShort(msg: CharSequence) {
-        Toast.makeText(BaseApplication.instance, msg, Toast.LENGTH_SHORT).show()
+        Toast.makeText(BaseApplication.mContext, msg, Toast.LENGTH_SHORT).show()
     }
 
     fun showLong(msg: CharSequence) {
-        Toast.makeText(BaseApplication.instance, msg, Toast.LENGTH_LONG).show()
+        Toast.makeText(BaseApplication.mContext, msg, Toast.LENGTH_LONG).show()
     }
 
 

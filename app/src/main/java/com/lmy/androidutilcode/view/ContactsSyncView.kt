@@ -14,6 +14,7 @@ import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.SweepGradient
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
@@ -31,7 +32,7 @@ class ContactsSyncView : View {
     // 没有网络＞云空间不足＞电量不足(todo 是否需要区分异常状态UI)
     companion object {
         const val STATE_SYNC_NOT = 0 //未开启同步  网络异常  云空间已满  电量不足
-        const val STATE_SYNCING_FIRST = 1 // 正在同步--第一段（平移--准备过程）
+        const val STATE_SYNCING_FIRST = 1 // 正在同步--第一段（缩放--准备过程）
         const val STATE_SYNCING_SECOND = 2 // 正在同步--第二段（旋转--同步过程）
         const val STATE_SYNC_COMPLETE = 3 // 同步完成
         const val local = "本地"
@@ -64,7 +65,7 @@ class ContactsSyncView : View {
     /**
      * 两个圆的半径
      */
-    private val radius = SizeUtils.dp2px(49f).toFloat()
+    private var radius = SizeUtils.dp2px(49f).toFloat()
     
     /**
      * 左侧圆初始的圆心x坐标（未做平移前）
@@ -99,7 +100,7 @@ class ContactsSyncView : View {
     /**
      * 进度圆弧的半径
      */
-    private val progressArcRadius = SizeUtils.dp2px(58f).toFloat()
+    private val progressArcRadius = SizeUtils.dp2px(67f).toFloat()
     
     /**
      * 进度圆弧的弧宽度
@@ -226,6 +227,11 @@ class ContactsSyncView : View {
      */
     private var contactsNumCloud: String = "0"
     
+    /**
+     * 缩放动画的进度值0-->1
+     */
+    private var scaleAnimatedValue = 0F
+    
     constructor(context: Context) : super(context) {
         init()
     }
@@ -342,12 +348,14 @@ class ContactsSyncView : View {
             canvas.drawCircle(rightCircleX, circleY, radius, circlePaint)
             
             textPaint.color = Color.WHITE
+            textPaint.alpha = ((1f - scaleAnimatedValue) * 255).toInt()
+            textPaint.textSize = SizeUtils.sp2px(24f).toFloat() - SizeUtils.sp2px(20f).toFloat() * scaleAnimatedValue
             
-            textPaint.textSize = SizeUtils.sp2px(24f).toFloat()
             canvas.drawText(contactsNumLocal, leftCircleX, textTopY, textPaint)
             canvas.drawText(contactsNumCloud, rightCircleX, textTopY, textPaint)
             
-            textPaint.textSize = SizeUtils.sp2px(14f).toFloat()
+            textPaint.textSize = SizeUtils.sp2px(14f).toFloat()- SizeUtils.sp2px(11f).toFloat() * scaleAnimatedValue
+            
             //测量文字高度
             textPaint.getTextBounds(local, 0, local.length, rect)
             val textHeight = rect.height()
@@ -371,6 +379,7 @@ class ContactsSyncView : View {
                         null)
                 }
             }
+            drawProgressCircle(canvas)
         } else if (syncState == STATE_SYNCING_SECOND) {
             drawProgressCircle(canvas)
         } else if (syncState == STATE_SYNC_COMPLETE) {
@@ -423,10 +432,12 @@ class ContactsSyncView : View {
             STATE_SYNCING_FIRST -> {
                 // 先计算出两个圆要移动的总距离
                 val moveWidth = radius + spacing / 2
+                // 计算两个圆半径要缩小的距离
+                val changeWidth = radius - strokeWidth / 2
                 translateAnimator = ValueAnimator.ofFloat(0f, 1f)
                 translateAnimator?.addUpdateListener { animation ->
-                    //开启平移动画
-                    startTranslate(animation.animatedValue as Float, moveWidth)
+                    //开启缩放
+                    startTranslate(animation.animatedValue as Float, changeWidth)
                 }
                 translateAnimator?.addListener(object : Animator.AnimatorListener {
                     override fun onAnimationStart(p0: Animator?) {
@@ -437,7 +448,7 @@ class ContactsSyncView : View {
                         setSyncState(STATE_SYNCING_SECOND)
                         rotateAnimation =
                             RotateAnimation(0f, 360f, width / 2.toFloat(), height / 2.toFloat())
-                        rotateAnimation?.duration = 800
+                        rotateAnimation?.duration = 3000
                         rotateAnimation?.repeatCount = Animation.INFINITE
                         rotateAnimation?.repeatMode = Animation.RESTART
                         rotateAnimation?.interpolator = LinearInterpolator()
@@ -450,7 +461,7 @@ class ContactsSyncView : View {
                     override fun onAnimationRepeat(p0: Animator?) {
                     }
                 })
-                translateAnimator?.duration = 3000
+                translateAnimator?.duration = 1000
                 translateAnimator?.start()
             }
             STATE_SYNC_COMPLETE -> {
@@ -472,10 +483,18 @@ class ContactsSyncView : View {
      * 开启平移动画
      * @param animatedValue Float
      */
-    private fun startTranslate(animatedValue: Float, moveWidth: Float) {
+    private fun startTranslate(animatedValue: Float, changeWidth: Float) {
         // 计算出偏移量
-        leftCircleX = leftCircleXStart + moveWidth * animatedValue
-        rightCircleX = rightCircleXStart - moveWidth * animatedValue
+        // leftCircleX = leftCircleXStart + changeWidth * animatedValue
+        // rightCircleX = rightCircleXStart - changeWidth * animatedValue
+        scaleAnimatedValue = animatedValue
+        
+        // 圆的半径缩小
+        radius = SizeUtils.dp2px(49f).toFloat() - changeWidth * animatedValue
+        
+        Log.e("lmy", "changeWidth = $changeWidth")
+        Log.e("lmy", "animatedValue = $animatedValue")
+        Log.e("lmy", "radius = $radius")
         invalidate()
     }
     

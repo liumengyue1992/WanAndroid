@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.lmy.androidutilcode.ui.districtphonenum.DistrictPhoneViewModel" />
+
+        <variable
+            name="itemRadius"
+            type="Float" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.lmy.androidutilcode.view.TitleBar
+            android:id="@+id/select_district_phone_tool_bar"
+            app:title="@string/select_district_phone_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:id="@+id/district_letter_bar_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/select_district_phone_tool_bar"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="4dp"
+            android:gravity="center_vertical">
+
+            <com.lmy.androidutilcode.view.LetterBar
+                android:id="@+id/select_district_letter_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="#4d000000"
+                android:textSize="12sp"
+                app:highlightBackground="@color/transparent_color"
+                app:highlight_color="#6373FF"
+                app:letter_space="6dp" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/district_phone_all_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@id/district_letter_bar_ll"
+            android:layout_toLeftOf="@id/district_letter_bar_ll"
+            android:overScrollMode="never" />
+
+        <include
+            android:id="@+id/select_district_phone_float_ll"
+            layout="@layout/layout_district_phone_select_child_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/district_phone_all_rv"
+            android:layout_alignRight="@id/district_phone_all_rv"
+            android:layout_marginTop="64dp"
+            android:layout_marginRight="16dp"
+            android:visibility="gone"
+            app:itemRadius="@{itemRadius}" />
+
+    </RelativeLayout>
+</layout>

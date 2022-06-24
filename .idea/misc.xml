@@ -4,9 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidUtilCode/app/src/main/res/drawable/bg.xml" value="0.1895" />
+        <entry key="..\:/AndroidUtilCode/app/src/main/res/drawable/district_phone_item_selector.xml" value="0.128" />
         <entry key="..\:/AndroidUtilCode/app/src/main/res/drawable/ic_sync_arrow.xml" value="0.1895" />
+        <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/activity_district_phone_number.xml" value="0.28174235403151066" />
         <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/activity_main.xml" value="0.33507853403141363" />
         <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/item_home.xml" value="0.28177083333333336" />
+        <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/layout_district_phone_child_item.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/layout_district_phone_child_select_item.xml" value="0.2604166666666667" />
+        <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/layout_district_phone_item.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/layout_district_phone_select_child_item.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/layout_title_toolbar.xml" value="0.3536458333333333" />
+        <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/layout_titlebar.xml" value="0.3536458333333333" />
         <entry key="..\:/AndroidUtilCode/base/src/main/res/layout/activity_main.xml" value="0.24635416666666668" />
       </map>
     </option>

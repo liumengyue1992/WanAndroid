@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LetterBar">
+        <attr name="android:textColor" />
+        <attr name="android:textSize" />
+        <attr name="letter_space" format="dimension" />
+        <attr name="highlight_color" format="color" />
+        <attr name="highlightBackground" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TitleBar">
+        <attr name="title" format="string" />
+        <attr name="menuIcon" format="reference" />
+        <attr name="menuIconVisible" format="boolean" />
+    </declare-styleable>
+</resources>

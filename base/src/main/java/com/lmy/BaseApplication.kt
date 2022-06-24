@@ -10,12 +10,12 @@ import com.lmy.uitl.isMainProcess
  */
 open class BaseApplication : Application() {
     companion object {
-        lateinit var instance: BaseApplication
+        lateinit var mContext: BaseApplication
     }
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
+        mContext = this
         if (isMainProcess(this)){
             init()
         }

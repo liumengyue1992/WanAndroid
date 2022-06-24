@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="district_phone_item_radius">8dp</dimen>
+    <dimen name="district_phone_letter_size">14sp</dimen>
+    <dimen name="district_phone_letter_height">30dp</dimen>
+    <dimen name="district_phone_letter_padding_left">24dp</dimen>
+    <dimen name="district_phone_item_height">47dp</dimen>
+    <dimen name="district_phone_divider_height">0.5dp</dimen>
+    <dimen name="district_phone_select_item_radius">4dp</dimen>
+</resources>
