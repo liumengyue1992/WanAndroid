@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidUtilCode/aidlclient/src/main/res/layout/activity_main.xml" value="0.2942708333333333" />
         <entry key="..\:/AndroidUtilCode/app/src/main/res/drawable/bg.xml" value="0.1895" />
         <entry key="..\:/AndroidUtilCode/app/src/main/res/drawable/district_phone_item_selector.xml" value="0.128" />
         <entry key="..\:/AndroidUtilCode/app/src/main/res/drawable/ic_sync_arrow.xml" value="0.1895" />
+        <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/activity_ashmem.xml" value="0.35260416666666666" />
         <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/activity_district_phone_number.xml" value="0.28174235403151066" />
         <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/activity_main.xml" value="0.33507853403141363" />
         <entry key="..\:/AndroidUtilCode/app/src/main/res/layout/item_home.xml" value="0.28177083333333336" />
