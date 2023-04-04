@@ -11,6 +11,7 @@ import com.lmy.androidutilcode.base.BaseViewModel
  */
 class MainViewModel(private val app: Application) : BaseViewModel(app) {
     val data = MutableLiveData<Int>(0)
+    var textString = MutableLiveData<String>("hello world")
     fun getData() {
     }
 }

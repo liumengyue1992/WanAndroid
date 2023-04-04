@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.lmy.BaseApplication
 import com.lmy.androidutilcode.util.ScreenAdaptationUtil
-import com.upuphone.cloudservice.annotation.PageId
+import com.lmy.androidutilcode.annotation.PageId
 
 /**
  * @description：

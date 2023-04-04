@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.ViewModelProvider
 import com.lmy.BaseApplication
 import com.lmy.androidutilcode.util.ScreenAdaptationUtil
-import com.upuphone.cloudservice.annotation.PageId
+import com.lmy.androidutilcode.annotation.PageId
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -34,8 +35,8 @@ abstract class BaseVMActivity<V : ViewDataBinding, VM : BaseViewModel> : AppComp
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 屏幕适配
         ScreenAdaptationUtil.setDensityByWidth(this, BaseApplication.mContext)
+        initViewModel()
         initDataBinding()
         initData()
     }
@@ -45,14 +46,7 @@ abstract class BaseVMActivity<V : ViewDataBinding, VM : BaseViewModel> : AppComp
         binding.unbind()
     }
     
-    private fun initDataBinding() {
-        binding = DataBindingUtil.setContentView(this, getLayoutId())
-        createViewModel()
-        binding.setVariable(initVariableId(), viewModel)
-        binding.lifecycleOwner = this
-    }
-    
-    protected fun createViewModel() {
+    protected fun initViewModel() {
         val modelClass: Class<BaseViewModel>
         val type = javaClass.genericSuperclass
         modelClass = if (type is ParameterizedType) {
@@ -61,8 +55,15 @@ abstract class BaseVMActivity<V : ViewDataBinding, VM : BaseViewModel> : AppComp
             // 如果没有指定泛型参数，则默认使用BaseViewModel
             BaseViewModel::class.java
         }
-        viewModel = ViewModelProvider(this).get(modelClass) as VM
+        viewModel = ViewModelProvider(this)[modelClass] as VM
         viewModel.setCacheKey(getPageId())
+    }
+    
+    private fun initDataBinding() {
+        binding = DataBindingUtil.setContentView(this, getLayoutId())
+        // tip：dataBinding和viewModel进行绑定。参考：<README-关于dataBinding生成的BR文件.md>
+        binding.setVariable(initVariableId(), viewModel)
+        binding.lifecycleOwner = this
     }
     
     /**
@@ -72,7 +73,7 @@ abstract class BaseVMActivity<V : ViewDataBinding, VM : BaseViewModel> : AppComp
     abstract fun getLayoutId(): Int
     
     /**
-     * 初始化ViewModel的id
+     * 初始化ViewModel的id，可以在父类直接填充默认的BR.vm，但是为了子类可以自定义viewModel的名字(如首页我想在xml中引用的variable的name属性为homeViewModel)
      * @return Int
      */
     abstract fun initVariableId(): Int

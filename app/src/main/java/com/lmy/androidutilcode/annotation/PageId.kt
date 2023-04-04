@@ -1,4 +1,4 @@
-package com.upuphone.cloudservice.annotation
+package com.lmy.androidutilcode.annotation
 
 /**
  * 指定Activity的PageId
