@@ -11,8 +11,8 @@ import android.os.RemoteException
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.lmy.androidutilcode.IPersonManager
-import com.lmy.androidutilcode.bean.Person
+import com.lmy.wanandroid.IPersonManager
+import com.lmy.wanandroid.bean.Person
 
 class MainActivity : AppCompatActivity() {
     private var remoteService: IPersonManager? = null
@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         findViewById<TextView>(R.id.tv_bind).setOnClickListener {
             val intent = Intent()
-            intent.action = "com.lmy.androidutilcode.aidl.Server.Action" // action与服务端一致
-            intent.setPackage("com.lmy.androidutilcode")
+            intent.action = "com.lmy.wanandroid.aidl.Server.Action" // action与服务端一致
+            intent.setPackage("com.lmy.wanandroid")
             bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
         }
         findViewById<TextView>(R.id.tv_add).setOnClickListener {

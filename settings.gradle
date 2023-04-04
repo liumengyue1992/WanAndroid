@@ -13,7 +13,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "AndroidUtilCode"
+rootProject.name = "WanAndroid"
 include ':app'
 include ':base'
 include ':aidlclient'

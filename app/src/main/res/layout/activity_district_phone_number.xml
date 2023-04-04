@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.lmy.androidutilcode.ui.districtphonenum.DistrictPhoneViewModel" />
+            type="com.lmy.wanandroid.ui.districtphonenum.DistrictPhoneViewModel" />
 
         <variable
             name="itemRadius"
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.lmy.androidutilcode.view.TitleBar
+        <com.lmy.wanandroid.view.TitleBar
             android:id="@+id/select_district_phone_tool_bar"
             app:title="@string/select_district_phone_text"
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_marginRight="4dp"
             android:gravity="center_vertical">
 
-            <com.lmy.androidutilcode.view.LetterBar
+            <com.lmy.wanandroid.view.LetterBar
                 android:id="@+id/select_district_letter_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

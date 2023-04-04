@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.lmy.androidutilcode.bean.DistrictPhoneBean" />
+            type="com.lmy.wanandroid.bean.DistrictPhoneBean" />
 
     </data>
 
