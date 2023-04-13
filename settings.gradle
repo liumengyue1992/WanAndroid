@@ -1,5 +1,5 @@
 pluginManagement {
-    repositories {
+    repositories {// 指定插件的仓库位置
         gradlePluginPortal()
         google()
         mavenCentral()
@@ -17,3 +17,7 @@ rootProject.name = "WanAndroid"
 include ':app'
 include ':base'
 include ':aidlclient'
+
+/**
+ * 在Gradle5.0 版本之后，新加入了pluginManagement和dependencyResolutionManagement这两个功能，主要用于管理 Gradle 插件和依赖项的版本。
+ */
