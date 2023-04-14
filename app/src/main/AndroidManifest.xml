@@ -31,27 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.lmy.wanandroid.ui.districtphonenum.DistrictPhoneNumberActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.lmy.wanandroid.ui.ashmem.AshmemActivity"
-            android:screenOrientation="portrait" />
-
-        <service android:name="com.lmy.wanandroid.service.NumService" />
-        <service
-            android:name="com.lmy.wanandroid.ui.ashmem.RemoteService"
-            android:process=":RemoteService" />
-
-        <service
-            android:name="com.lmy.wanandroid.service.AIDLRemoteService"
-            android:exported="true"
-            android:process=":AIDLRemoteService">
-            <intent-filter>
-                <action android:name="com.lmy.wanandroid.aidl.Server.Action" />
-            </intent-filter>
-        </service>
-
 
     </application>
 

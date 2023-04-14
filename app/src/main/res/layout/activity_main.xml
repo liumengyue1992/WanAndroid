@@ -6,12 +6,9 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="vm"
             type="com.lmy.wanandroid.MainViewModel" />
 
-        <variable
-            name="myText"
-            type="String" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -24,9 +21,10 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_title"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@color/teal_700"
+                android:background="@color/color_d4237a"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toTopOf="parent">
@@ -43,10 +41,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:text="首页"
+                    android:text="@string/home"
                     android:textColor="@color/white" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+            <androidx.viewpager2.widget.ViewPager2
+                android:orientation="horizontal"
+                android:id="@+id/view_pager2"
+                app:layout_constraintTop_toBottomOf="@id/ll_title"
+                app:layout_constraintBottom_toTopOf="@id/bottomNav"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:labelVisibilityMode="labeled"
+                app:itemIconTint="@drawable/nav_icon_tint_selector"
+                app:itemTextColor="@color/nav_text_color_selector"
+                app:menu="@menu/bottom_nav_menu"
+                app:itemTextAppearanceActive="@style/style_nav_text_active"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

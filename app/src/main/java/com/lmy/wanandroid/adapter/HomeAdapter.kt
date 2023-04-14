@@ -2,7 +2,7 @@ package com.lmy.wanandroid.adapter
 
 import com.lmy.wanandroid.BR
 import com.lmy.wanandroid.R
-import com.lmy.wanandroid.base.BaseBindingAdapter
+import com.lmy.base.BaseBindingAdapter
 import com.lmy.wanandroid.databinding.ItemHomeBinding
 
 /**

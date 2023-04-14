@@ -1,5 +1,5 @@
 object BuildVersion {
-    const val compileSdk = 32
+    const val compileSdk = 33
     const val minSdk = 28
     const val targetSdk = 33
     const val versionCode = 1
@@ -7,6 +7,11 @@ object BuildVersion {
 }
 object Versions{
     // 也可以把下面Libs中的version全部抽取到这里
+}
+
+object ProjectStructure{
+    // true - 项目整体运行  false - 单组件运行
+    const val isMainModule = false
 }
 
 object Libs {
@@ -29,6 +34,8 @@ object Libs {
     private const val okhttp3LoggInterceptorVersion = "4.10.0"
     private const val retrofit2ConverterGsonVersion = "2.9.0"
     private const val bannerVersion = "2.2.2"
+    private const val viewpager2Version = "1.0.0"
+    private const val coilVersion = "2.3.0"
     
     const val junit = "junit:junit:$junitVersion"
     const val testJunit = "androidx.test.ext:junit$testJunitVersion"
@@ -53,6 +60,9 @@ object Libs {
     const val retrofit2ConverterGson = "com.squareup.retrofit2:converter-gson:$retrofit2ConverterGsonVersion"
     // banner
     const val banner = "io.github.youth5201314:banner:$bannerVersion"
+    // viewpager2
+    const val viewpager2 = "androidx.viewpager2:viewpager2:$viewpager2Version"
+    const val coil = "io.coil-kt:coil:$coilVersion"
 }
 /**
  * 使用buildSrc构建版本的缺点：

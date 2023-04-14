@@ -63,8 +63,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':base')
-
+    implementation project(path: ':module_base')
     testImplementation Libs.junit
     androidTestImplementation Libs.testJunit
     androidTestImplementation Libs.testEspresso
@@ -90,6 +89,10 @@ dependencies {
     implementation Libs.retrofit2Adapter
     implementation Libs.okhttp3LoggInterceptor
     implementation Libs.retrofit2ConverterGson
-    // banner
+
     implementation Libs.banner
+    implementation Libs.viewpager2
+    implementation Libs.coil
+
+
 }

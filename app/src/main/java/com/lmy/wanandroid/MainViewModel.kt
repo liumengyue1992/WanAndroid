@@ -2,7 +2,7 @@ package com.lmy.wanandroid
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.lmy.wanandroid.base.BaseViewModel
+import com.lmy.base.BaseViewModel
 
 /**
  * @description：

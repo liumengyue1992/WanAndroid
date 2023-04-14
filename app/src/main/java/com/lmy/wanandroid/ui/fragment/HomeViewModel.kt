@@ -1,7 +1,7 @@
 package com.lmy.wanandroid.ui.fragment
 
 import android.app.Application
-import com.lmy.wanandroid.base.BaseViewModel
+import com.lmy.base.BaseViewModel
 
 /**
  * @description：
