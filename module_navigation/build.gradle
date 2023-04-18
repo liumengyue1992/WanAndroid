@@ -1,0 +1,21 @@
+if (ProjectStructure.isApplication) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'org.jetbrains.kotlin.android'
+apply from: '../config.gradle'
+
+android {
+    namespace 'com.lmy.module_navigation'
+
+    defaultConfig {
+        if (ProjectStructure.isApplication) { // application时需要id，版本号、版本名
+            applicationId "com.lmy.module_navigation"
+        }
+    }
+}
+
+dependencies {
+    implementation project(path: ':module_base')
+}

@@ -4,13 +4,13 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationBarView
-import com.lmy.wanandroid.adapter.ViewPager2Adapter
 import com.lmy.base.BaseVMActivity
+import com.lmy.module_home.ui.HomeFragment
+import com.lmy.module_mine.ui.MineFragment
+import com.lmy.module_navigation.ui.NavigationFragment
+import com.lmy.module_project.ui.ProjectFragment
+import com.lmy.wanandroid.adapter.ViewPager2Adapter
 import com.lmy.wanandroid.databinding.ActivityMainBinding
-import com.lmy.wanandroid.ui.fragment.HomeFragment
-import com.lmy.wanandroid.ui.fragment.MineFragment
-import com.lmy.wanandroid.ui.fragment.NavigationFragment
-import com.lmy.wanandroid.ui.fragment.ProjectFragment
 
 class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
     

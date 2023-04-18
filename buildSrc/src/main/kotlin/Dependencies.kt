@@ -10,8 +10,8 @@ object Versions{
 }
 
 object ProjectStructure{
-    // true - 项目整体运行  false - 单组件运行
-    const val isMainModule = false
+    // true - 每个模块都可为application单独运行  false - 整体运行
+    const val isApplication = false
 }
 
 object Libs {

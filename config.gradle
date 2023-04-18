@@ -1,35 +1,28 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id 'kotlin-parcelize'
-}
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
 
 android {
     compileSdk BuildVersion.compileSdk
 
     defaultConfig {
-        applicationId "com.lmy.wanandroid"
+        if (ProjectStructure.isApplication) { // application时需要id，版本号、版本名
+            versionCode BuildVersion.versionCode
+            versionName BuildVersion.versionName
+        }
         minSdk BuildVersion.minSdk
         targetSdk BuildVersion.targetSdk
-        versionCode BuildVersion.versionCode
-        versionName BuildVersion.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
-        debug {
-            keyAlias "android"
-            keyPassword "123Qwerty"
-            storeFile file("platform-android.jks")
-            storePassword "123Qwerty"
-        }
-        release {
-            keyAlias "android"
-            keyPassword "123Qwerty"
-            storeFile file("platform-android.jks")
-            storePassword "123Qwerty"
+    sourceSets {
+        main {
+            if (ProjectStructure.isApplication) { // 修改使用的AndroidManifest
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+            }
         }
     }
 
@@ -37,36 +30,25 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField('String', 'API_HOST', '\"https://api-fat.upuphone.com/\"')
-            signingConfig signingConfigs.release
-        }
-
-        debug {
-            minifyEnabled false
-            debuggable true
-            buildConfigField('String', 'API_HOST', '\"https://api-dev.upuphone.com/\"')
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
     buildFeatures {
         dataBinding = true
     }
+    kapt {
+        generateStubs = true
+    }
+
 }
 
 dependencies {
-    // 不是组件时才依赖
-    if (!ProjectStructure.isApplication) {
-        implementation project(path: ':module_home')
-        implementation project(path: ':module_project')
-        implementation project(path: ':module_navigation')
-        implementation project(path: ':module_mine')
-    }
     implementation project(path: ':module_base')
     testImplementation Libs.junit
     androidTestImplementation Libs.testJunit
