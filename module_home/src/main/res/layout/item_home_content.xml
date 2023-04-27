@@ -1,104 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginBottom="6dp"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="2dp">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
-
-        <LinearLayout
-            android:id="@+id/ll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tag1"
-                style="@style/style_home_rv_item2"
-                android:layout_marginEnd="10dp"
-                android:text="新"
-                android:textColor="@color/red"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/tag2"
-                style="@style/style_home_rv_item2"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/shape_tag2"
-                android:text="公众号"
-                android:textColor="@color/green"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/name"
-                style="@style/style_home_rv_item"
-                android:maxLength="20"
-                android:text="@string/n_a"
-                android:textColor="@color/black6" />
-        </LinearLayout>
-
+        android:paddingVertical="@dimen/item_content_padding">
 
         <TextView
-            android:id="@+id/time"
-            style="@style/style_home_rv_item"
-            android:text="@string/n_a"
-            android:textColor="@color/black6"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/title"
+            android:id="@+id/tv_article_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_fresh"
+            android:paddingHorizontal="@dimen/dp_4"
+            android:paddingVertical="@dimen/dp_2"
+            android:text="@string/topping"
+            android:textColor="@color/Red"
+            android:textSize="@dimen/sp_10"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/dp_12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_article_fresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:background="@drawable/bg_fresh"
+            android:paddingHorizontal="@dimen/dp_4"
+            android:paddingVertical="@dimen/dp_2"
+            android:text="@string/newing"
+            android:textColor="@color/Red"
+            android:textSize="@dimen/sp_10"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/tv_article_top"
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_article_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:background="@drawable/bg_tag"
+            android:paddingHorizontal="@dimen/dp_4"
+            android:paddingVertical="@dimen/dp_2"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/sp_10"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/tv_article_fresh"
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:text="@string/article_tag"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_article_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_article_top"
+            android:layout_marginStart="@dimen/dp_12"
+            android:textColor="@color/item_author"
+            android:textSize="@dimen/item_tv_author"
+            app:layout_constraintStart_toEndOf="@id/tv_article_tag"
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:text="@string/article_author" />
+
+        <TextView
+            android:layout_marginEnd="@dimen/dp_12"
+            android:id="@+id/tv_article_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_article_top"
+            android:textColor="@color/item_date"
+            android:textSize="@dimen/item_tv_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/release_time" />
+
+        <TextView
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:id="@+id/tv_article_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
             android:ellipsize="end"
-            android:gravity="center_vertical"
+            android:gravity="top|start"
             android:maxLines="2"
-            android:text="@string/n_a"
-            android:textColor="@color/theme_color"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll" />
+            android:textColor="@color/item_title"
+            android:textSize="@dimen/item_tv_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_article_author"
+            tools:text="@string/article_title" />
+
 
         <TextView
-            android:id="@+id/t3"
-            style="@style/style_home_rv_item"
-            android:layout_marginTop="10dp"
-            android:text="分类："
-            android:textColor="@color/blacka"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            android:layout_marginStart="@dimen/dp_12"
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_article_title"
+            tools:text="@string/category" />
 
-        <TextView
-            android:id="@+id/type"
-            style="@style/style_home_rv_item"
-            android:layout_marginTop="10dp"
-            android:text="@string/n_a"
-            android:textColor="@color/black6"
-            app:layout_constraintLeft_toRightOf="@id/t3"
-            app:layout_constraintTop_toBottomOf="@id/title" />
 
-        <ImageView
-            android:id="@+id/img_collect"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/icon_collect_1"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_marginEnd="@dimen/dp_12"
+            android:id="@+id/iv_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_like_not" />
+
+        <View
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_02"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/Grey200"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_category" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</layout>

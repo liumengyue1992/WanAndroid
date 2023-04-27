@@ -18,7 +18,7 @@ object Libs {
     private const val junitVersion = "4.13.2"
     private const val testJunitVersion = "1.1.5"
     private const val testEspressoVersion = "3.5.1"
-    
+
     private const val androidxCoreKtxVersion = "1.8.0"
     private const val androidxAppcompatVersion = "1.4.1"
     private const val materialVersion = "1.8.0"
@@ -39,11 +39,12 @@ object Libs {
     private const val koinCoreVersion = "3.4.0"
     private const val koinAndroidVersion = "3.4.0"
     private const val koinAndroidxNavVersion = "3.4.0"
-    
+    private const val smartRefreshLayoutVersion = "2.0.6"
+
     const val junit = "junit:junit:$junitVersion"
     const val testJunit = "androidx.test.ext:junit$testJunitVersion"
     const val testEspresso = "androidx.test.espresso:espresso-core:$testEspressoVersion"
-    
+
     const val androidxCoreKtx = "androidx.core:core-ktx:$androidxCoreKtxVersion"
     const val androidxAppcompat = "androidx.appcompat:appcompat:$androidxAppcompatVersion"
     const val material = "com.google.android.material:material:$materialVersion"
@@ -72,7 +73,10 @@ object Libs {
     const val koinAndroid = "io.insert-koin:koin-android:$koinAndroidVersion"
     // Navigation Graph
     const val koinAndroidxNavigation = "io.insert-koin:koin-androidx-navigation:$koinAndroidxNavVersion"
-    
+    // smartRefreshLayout
+    const val smartRefreshLayout = "io.github.scwang90:refresh-layout-kernel:$smartRefreshLayoutVersion"
+    // 经典刷新头
+    const val  smartRefreshLayoutClassicsHeader = "io.github.scwang90:refresh-header-classics:$smartRefreshLayoutVersion"
 }
 /**
  * 使用buildSrc构建版本的缺点：

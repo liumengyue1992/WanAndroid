@@ -24,7 +24,7 @@ class HomeRepo(private val homeApi: HomeApi) : BaseRepository() {
         }
     )
     
-    suspend fun getHomeArticle(page: Int, pageSize: Int, data: MutableLiveData<List<Article>>) = request(
+    suspend fun getHomeArticle(page: Int, pageSize: Int, data: MutableLiveData<Article>) = request(
         block = { homeApi.getHomeArticle(page, pageSize) },
         data
     )

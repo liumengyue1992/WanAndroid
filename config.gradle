@@ -59,7 +59,7 @@ dependencies {
     implementation Libs.material
     implementation Libs.constraintLayout
 
-    //wanAndroid
+    // util
     implementation Libs.utilCode
     implementation Libs.androidCommon
 
@@ -86,4 +86,7 @@ dependencies {
     implementation Libs.koinAndroid
     // Koin for navigation
     implementation Libs.koinAndroidxNavigation
+
+    implementation Libs.smartRefreshLayout
+    implementation Libs.smartRefreshLayoutClassicsHeader
 }

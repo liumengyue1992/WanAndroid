@@ -21,5 +21,5 @@ interface HomeApi {
    
     // 首页文章列表-- 注：该接口支持传入 page_size 控制分页数量，取值为[1-40]，不传则使用默认值，一旦传入了 page_size，后续该接口分页都需要带上，否则会造成分页读取错误。
     @GET("article/list/{page}/json")
-    suspend fun getHomeArticle(@Path("page")page: Int,@Query("page_size") pageSize:Int): BaseResult<List<Article>>
+    suspend fun getHomeArticle(@Path("page")page: Int,@Query("page_size") pageSize:Int): BaseResult<Article>
 }

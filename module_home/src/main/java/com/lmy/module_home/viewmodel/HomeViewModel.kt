@@ -15,7 +15,7 @@ class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
     val page = 0
     val pageSize = 20
     var bannerList = MutableLiveData<List<BannerBean>>()
-    var homeArticle = MutableLiveData<List<Article>>()
+    var homeArticle = MutableLiveData<Article>()
     
     fun getBannerData() = launch { repo.getBanner(bannerList) }
     
