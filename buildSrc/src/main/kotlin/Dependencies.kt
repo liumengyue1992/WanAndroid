@@ -20,22 +20,25 @@ object Libs {
     private const val testEspressoVersion = "3.5.1"
     
     private const val androidxCoreKtxVersion = "1.8.0"
-    private const val androidxAppcompatVersion = "1.5.1"
+    private const val androidxAppcompatVersion = "1.4.1"
     private const val materialVersion = "1.8.0"
     private const val constraintlayoutVersion = "2.1.4"
     private const val utilCodeVersion = "1.31.0"
     private const val androidCommonVersion = "4.2.15"
-    private const val lifecycleRuntimeVersion = "2.5.1"
-    private const val lifecycleLivedataVersion = "2.4.1"
-    private const val lifecycleViewmodelVersion = "2.5.1"
+    private const val lifecycleRuntimeVersion = "2.4.0"
+    private const val lifecycleLivedataVersion = "2.4.0"
+    private const val lifecycleViewmodelVersion = "2.4.0"
     private const val dataStoreVersion = "1.0.0"
     private const val retrofit2Version = "2.9.0"
     private const val retrofit2AdapterVersion = "0.9.2"
     private const val okhttp3LoggInterceptorVersion = "4.10.0"
     private const val retrofit2ConverterGsonVersion = "2.9.0"
-    private const val bannerVersion = "2.2.2"
+    private const val bannerViewPagerVersion = "3.5.11"
     private const val viewpager2Version = "1.0.0"
     private const val coilVersion = "2.3.0"
+    private const val koinCoreVersion = "3.4.0"
+    private const val koinAndroidVersion = "3.4.0"
+    private const val koinAndroidxNavVersion = "3.4.0"
     
     const val junit = "junit:junit:$junitVersion"
     const val testJunit = "androidx.test.ext:junit$testJunitVersion"
@@ -58,11 +61,18 @@ object Libs {
     const val retrofit2Adapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofit2AdapterVersion"
     const val okhttp3LoggInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttp3LoggInterceptorVersion"
     const val retrofit2ConverterGson = "com.squareup.retrofit2:converter-gson:$retrofit2ConverterGsonVersion"
-    // banner
-    const val banner = "io.github.youth5201314:banner:$bannerVersion"
+    // BannerViewPager
+    const val bannerViewPager = "com.github.zhpanvip:bannerviewpager:$bannerViewPagerVersion"
     // viewpager2
     const val viewpager2 = "androidx.viewpager2:viewpager2:$viewpager2Version"
     const val coil = "io.coil-kt:coil:$coilVersion"
+    // Koin for Kotlin
+    const val koinCore = "io.insert-koin:koin-core:$koinCoreVersion"
+    // Koin for Android
+    const val koinAndroid = "io.insert-koin:koin-android:$koinAndroidVersion"
+    // Navigation Graph
+    const val koinAndroidxNavigation = "io.insert-koin:koin-androidx-navigation:$koinAndroidxNavVersion"
+    
 }
 /**
  * 使用buildSrc构建版本的缺点：

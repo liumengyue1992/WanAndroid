@@ -9,6 +9,6 @@ import com.lmy.base.BaseViewModel
  * @author：mengyue.liu
  * @time： 2023/4/13 18:48
  */
-class ProjectViewModel(private val app:Application): BaseViewModel(app) {
+class ProjectViewModel(): BaseViewModel() {
 
 }

@@ -9,6 +9,6 @@ import com.lmy.base.BaseViewModel
  * @author：mengyue.liu
  * @time： 2023/4/13 18:48
  */
-class NavigationViewModel(private val app: Application): BaseViewModel(app) {
+class NavigationViewModel(): BaseViewModel() {
 
 }

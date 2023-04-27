@@ -4,6 +4,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationBarView
+import com.lmy.base.BaseActivity
 import com.lmy.base.BaseVMActivity
 import com.lmy.module_home.ui.HomeFragment
 import com.lmy.module_mine.ui.MineFragment
@@ -12,14 +13,9 @@ import com.lmy.module_project.ui.ProjectFragment
 import com.lmy.wanandroid.adapter.ViewPager2Adapter
 import com.lmy.wanandroid.databinding.ActivityMainBinding
 
-class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
     
     override fun getLayoutId(): Int = R.layout.activity_main
-    
-    override fun initVariableId(): Int {
-        // tip：参考：<README-关于dataBinding生成的BR文件.md>
-        return BR.vm
-    }
     
     override fun initData() {
         // 去除自带的选中颜色,去除后文字和图片选择效果就是跟我们自定义的效果一样

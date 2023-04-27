@@ -11,13 +11,12 @@ import com.lmy.module_project.BR
  * @author：mengyue.liu
  * @time： 2023/4/13 18:47
  */
-class ProjectFragment : BaseVMFragment<FragmentProjectBinding, ProjectViewModel>() {
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_project
+class ProjectFragment : BaseVMFragment<FragmentProjectBinding>() {
+    override fun initObserver() {
     }
     
-    override fun initVariableId(): Int {
-        return BR._all
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_project
     }
     
     override fun initData() {

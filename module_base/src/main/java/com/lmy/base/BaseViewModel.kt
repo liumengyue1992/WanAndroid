@@ -1,22 +1,24 @@
 package com.lmy.base
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.lmy.network.BaseResult
 import com.lmy.uitl.LogUtil
 import com.lmy.uitl.NetworkUtils
 import com.lmy.wanandroid.util.DataStoreUtil
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 /**
  * @description：
  * @author：Mengyue.Liu
  * @time： 2022/5/11 14:30
  */
-open class BaseViewModel(app: Application) : AndroidViewModel(app) {
+typealias vmBlock = suspend () -> Unit
+
+open class BaseViewModel : ViewModel() {
     
     lateinit var cachedKey: String
     
@@ -25,6 +27,18 @@ open class BaseViewModel(app: Application) : AndroidViewModel(app) {
      */
     fun setCacheKey(key: String) {
         this.cachedKey = key
+    }
+    
+    fun launch(block: vmBlock) {
+        // 使用viewModelScope需要添加依赖androidx.navigation:navigation-fragment-ktx
+        // 这里不需要指定viewModelScope.launch(Dispatchers.IO)，因为retrofit自身会在子线程进行网络请求
+        viewModelScope.launch {
+            try {
+                block.invoke()
+            } catch (e: Exception) {
+                onError(e)
+            }
+        }
     }
     
     /**
@@ -42,7 +56,7 @@ open class BaseViewModel(app: Application) : AndroidViewModel(app) {
             onError(it)
         },
         fail: (response: BaseResult<T>) -> Unit = {
-            onFail(it)
+        
         },
         isRequestCache: Boolean = false,
     ): T? {
@@ -50,15 +64,15 @@ open class BaseViewModel(app: Application) : AndroidViewModel(app) {
             if (!NetworkUtils.isNetworkConnected()) {
                 return null
             }
-            val response = block.invoke()
-            if (response.isOk() && response.data != null) {
+            val result = block.invoke()
+            if (result.isSuccess() && result.data != null) {
                 if (isRequestCache) {
-                    DataStoreUtil.putData(cachedKey, GsonUtils.toJson(response.data))
+                    DataStoreUtil.putData(cachedKey, GsonUtils.toJson(result.data))
                 }
-                liveData?.value = response.data
-                return response.data
+                liveData?.value = result.data
+                return result.data
             } else {
-                fail(response)
+                fail(result)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -67,31 +81,9 @@ open class BaseViewModel(app: Application) : AndroidViewModel(app) {
         return null
     }
     
-    /**
-     * 取消协程
-     * @param job 协程job
-     */
-    protected fun cancelJob(job: Job?) {
-        job?.let {
-            if (job.isActive && !job.isCompleted && !job.isCancelled) {
-                job.cancel()
-            }
-        }
-    }
     
     private fun onError(e: Exception) {
         LogUtil.d("onError->${e}")
-        ToastUtils.showShort("网络异常")
-    }
-    
-    private fun <T> onFail(response: BaseResult<T>) {
-        LogUtil.d("onFail->$response")
-        // if (!TextUtils.isEmpty(response.msg)) {
-        //     if (!TextUtils.equals(response.msg, NET_SUCCESS)) {
-        //         response.msg?.let { toastShort(it) }
-        //     }
-        // } else {
-        //     toastShort(R.string.server_slowly)
-        // }
+        ToastUtils.showShort(e.message)
     }
 }

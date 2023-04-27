@@ -6,5 +6,12 @@ package com.lmy.module_home.bean
  * @time： 2023/4/14 10:33
  */
 data class BannerBean(
-    var imageUrl: String,
+    val desc: String,
+    val id: Int,
+    val imagePath: String,
+    val isVisible: Int,
+    val order: Int,
+    val title: String,
+    val type: Int,
+    val url: String
 )

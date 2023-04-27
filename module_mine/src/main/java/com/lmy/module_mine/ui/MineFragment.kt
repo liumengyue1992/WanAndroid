@@ -10,14 +10,15 @@ import com.lmy.module_mine.BR
  * @author：mengyue.liu
  * @time： 2023/4/13 18:47
  */
-class MineFragment : BaseVMFragment<FragmentMineBinding, MineViewModel>() {
+class MineFragment : BaseVMFragment<FragmentMineBinding>() {
+    override fun initObserver() {
+    
+    }
+    
     override fun getLayoutId(): Int {
         return R.layout.fragment_mine
     }
     
-    override fun initVariableId(): Int {
-        return BR._all
-    }
     
     override fun initData() {
     

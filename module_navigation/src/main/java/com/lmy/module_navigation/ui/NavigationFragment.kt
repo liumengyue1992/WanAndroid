@@ -10,14 +10,14 @@ import com.lmy.module_navigation.viewmodel.NavigationViewModel
  * @author：mengyue.liu
  * @time： 2023/4/13 18:47
  */
-class NavigationFragment : BaseVMFragment<FragmentNavigationBinding, NavigationViewModel>() {
+class NavigationFragment : BaseVMFragment<FragmentNavigationBinding>() {
+    override fun initObserver() {
+    }
+    
     override fun getLayoutId(): Int {
         return R.layout.fragment_navigation
     }
     
-    override fun initVariableId(): Int {
-        return BR._all
-    }
     
     override fun initData() {
     

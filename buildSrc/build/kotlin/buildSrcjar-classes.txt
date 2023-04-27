@@ -1,0 +1,1 @@
+D:\myself\WanAndroid\buildSrc\build\classes\kotlin\main\BuildVersion.class;D:\myself\WanAndroid\buildSrc\build\classes\kotlin\main\Libs.class;D:\myself\WanAndroid\buildSrc\build\classes\kotlin\main\ProjectStructure.class;D:\myself\WanAndroid\buildSrc\build\classes\kotlin\main\Versions.class

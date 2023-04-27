@@ -3,7 +3,6 @@ if (ProjectStructure.isApplication) {
 } else {
     apply plugin: 'com.android.library'
 }
-apply plugin: 'org.jetbrains.kotlin.android'
 apply from: '../config.gradle'
 
 android {

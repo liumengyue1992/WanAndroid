@@ -94,7 +94,14 @@ dependencies {
     implementation Libs.okhttp3LoggInterceptor
     implementation Libs.retrofit2ConverterGson
 
-    implementation Libs.banner
+    implementation Libs.bannerViewPager
     implementation Libs.viewpager2
     implementation Libs.coil
+
+    // Koin for Kotlin
+    implementation Libs.koinCore
+    // Koin for AndroidX
+    implementation Libs.koinAndroid
+    // Koin for navigation
+    implementation Libs.koinAndroidxNavigation
 }

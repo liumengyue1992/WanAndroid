@@ -33,7 +33,8 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // 屏幕适配
         ScreenAdaptationUtil.setDensityByWidth(this, BaseApplication.mContext)
-        initDataBinding()
+        binding = DataBindingUtil.setContentView(this, getLayoutId())
+        binding.lifecycleOwner = this
         initData()
     }
     
@@ -42,16 +43,11 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
         binding.unbind()
     }
     
-    private fun initDataBinding() {
-        binding = DataBindingUtil.setContentView(this, getLayoutId())
-        binding.lifecycleOwner = this
-    }
-    
     /**
      * 获取布局id
      * @return Int
      */
     abstract fun getLayoutId(): Int
     
-    abstract fun initData()
+    open fun initData(){}
 }
