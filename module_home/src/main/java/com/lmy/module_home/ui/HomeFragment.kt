@@ -24,6 +24,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
         homeViewModel.getHomeArticle()
 
         binding.smartRefresh.setOnRefreshListener {
+            // todo 刷新数据
             it.finishRefresh(REFRESHTIME)
         }
 
