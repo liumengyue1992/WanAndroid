@@ -52,4 +52,5 @@ dependencies {
     // datastore
     implementation Libs.dataStore
 
+    implementation Libs.smartRefreshLayout
 }

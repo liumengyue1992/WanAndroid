@@ -11,8 +11,6 @@ import com.lmy.ext.setVisible
 import com.lmy.module_home.R
 import com.lmy.module_home.bean.ArticleDetail
 import com.lmy.module_home.databinding.ItemHomeContentBinding
-import com.lmy.module_home.databinding.ItemHomeFooterBinding
-import com.lmy.module_home.databinding.ItemHomeNomoredataBinding
 
 /**
  * @description：
@@ -20,9 +18,6 @@ import com.lmy.module_home.databinding.ItemHomeNomoredataBinding
  * @time： 2023/4/26 14:42
  */
 class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var content = 0
-    private var footer = 1
-    private var noMoreData = 2
 
     // AsyncListDiffer是一个工具类，可以帮助我们异步更新RecyclerView列表
     private var diff = AsyncListDiffer(this, object : DiffUtil.ItemCallback<ArticleDetail>() {
@@ -38,41 +33,17 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     })
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            content -> {
-                val inflate = DataBindingUtil.inflate<ItemHomeContentBinding>(
-                    LayoutInflater.from(parent.context),
-                    R.layout.item_home_content,
-                    parent,
-                    false
-                )
-                ContentViewHolder(inflate)
-            }
-
-            footer -> {
-                val inflate = DataBindingUtil.inflate<ItemHomeFooterBinding>(
-                    LayoutInflater.from(parent.context),
-                    R.layout.item_home_footer,
-                    parent,
-                    false
-                )
-                FooterViewHolder(inflate)
-            }
-
-            else -> {
-                val inflate = DataBindingUtil.inflate<ItemHomeNomoredataBinding>(
-                    LayoutInflater.from(parent.context),
-                    R.layout.item_home_nomoredata,
-                    parent,
-                    false
-                )
-                NoMoreDataViewHolder(inflate)
-            }
-        }
+        val inflate = DataBindingUtil.inflate<ItemHomeContentBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.item_home_content,
+            parent,
+            false
+        )
+        return ContentViewHolder(inflate)
     }
 
+
     override fun getItemCount(): Int {
-//        return if (diff.currentList.size == 0) 1 else diff.currentList.size + 1
         return diff.currentList.size
     }
 
@@ -103,17 +74,5 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         diff.submitList(ArrayList(article))
     }
 
-    class ContentViewHolder(val binding: ItemHomeContentBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-    }
-
-    class FooterViewHolder(val binding: ItemHomeFooterBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-    }
-
-    class NoMoreDataViewHolder(val binding: ItemHomeNomoredataBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-    }
+    class ContentViewHolder(val binding: ItemHomeContentBinding) : RecyclerView.ViewHolder(binding.root)
 }
