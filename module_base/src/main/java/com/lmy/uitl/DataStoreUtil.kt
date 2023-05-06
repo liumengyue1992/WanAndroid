@@ -22,7 +22,7 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.lmy.BaseApplication
+import com.lmy.base.BaseApplication
 
 /**
  * 数据存储

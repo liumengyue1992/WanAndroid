@@ -1,7 +1,7 @@
 package com.lmy.uitl
 
 import android.widget.Toast
-import com.lmy.BaseApplication
+import com.lmy.base.BaseApplication
 
 /**
  * @description：

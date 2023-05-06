@@ -9,4 +9,7 @@
     <string name="author">作者：%1$s</string>
     <string name="shareUser">分享人：%1$s</string>
     <string name="category">种类\n</string>
+    <string name="article_category">%1$s&#047;%2$s</string>
 </resources>
+
+<!--Android资源文件strings实现特殊字符转义:https://www.jianshu.com/p/39400832f505/-->

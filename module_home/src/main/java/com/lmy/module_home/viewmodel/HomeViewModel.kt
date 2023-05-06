@@ -3,6 +3,7 @@ package com.lmy.module_home.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.lmy.base.BaseViewModel
 import com.lmy.module_home.bean.Article
+import com.lmy.module_home.bean.ArticleDetail
 import com.lmy.module_home.bean.BannerBean
 import com.lmy.module_home.repo.HomeRepo
 
@@ -13,11 +14,17 @@ import com.lmy.module_home.repo.HomeRepo
  */
 class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
 
-    val pageSize = 5
+    private val pageSize = 20
     var bannerList = MutableLiveData<List<BannerBean>>()
     var homeArticle = MutableLiveData<Article>()
-    
+    var homeTopArticle = MutableLiveData<List<ArticleDetail>>()
+
     fun getBannerData() = launch { repo.getBanner(bannerList) }
-    
-    fun getHomeArticle(currentPage: Int) = launch { repo.getHomeArticle(currentPage,pageSize,homeArticle) }
+
+    fun getHomeArticle(currentPage: Int) =
+        launch { repo.getHomeArticle(currentPage, pageSize, homeArticle) }
+
+    fun getHomeTopArticle() {
+        launch { repo.getHomeTopArticle(homeTopArticle) }
+    }
 }

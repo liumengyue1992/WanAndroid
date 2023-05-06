@@ -1,21 +1,11 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id 'kotlin-parcelize'
-}
+apply plugin: 'com.android.application'
+apply from: '../config.gradle'
 
 android {
-    compileSdk BuildVersion.compileSdk
+    namespace 'com.lmy.wanandroid'
 
     defaultConfig {
         applicationId "com.lmy.wanandroid"
-        minSdk BuildVersion.minSdk
-        targetSdk BuildVersion.targetSdk
-        versionCode BuildVersion.versionCode
-        versionName BuildVersion.versionName
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -35,73 +25,26 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField('String', 'API_HOST', '\"https://api-fat.upuphone.com/\"')
+            buildConfigField('String', 'API_HOST', '\"https://www.wanandroid.com\"')
             signingConfig signingConfigs.release
         }
 
         debug {
             minifyEnabled false
             debuggable true
-            buildConfigField('String', 'API_HOST', '\"https://api-dev.upuphone.com/\"')
+            buildConfigField('String', 'API_HOST', '\"https://www.wanandroid.com\"')
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    buildFeatures {
-        dataBinding = true
-    }
 }
 
 dependencies {
-    // 不是组件时才依赖
-    if (!ProjectStructure.isApplication) {
-        implementation project(path: ':module_home')
-        implementation project(path: ':module_project')
-        implementation project(path: ':module_navigation')
-        implementation project(path: ':module_mine')
-    }
-    implementation project(path: ':module_base')
-    testImplementation Libs.junit
-    androidTestImplementation Libs.testJunit
-    androidTestImplementation Libs.testEspresso
-
-    implementation Libs.androidxCoreKtx
-    implementation Libs.androidxAppcompat
-    implementation Libs.material
-    implementation Libs.constraintLayout
-
-    //wanAndroid
-    implementation Libs.utilCode
-    implementation Libs.androidCommon
-
-    implementation Libs.lifecycleRuntime
-    implementation Libs.lifecycleLivedata
-    implementation Libs.lifecycleViewmodel
-
-    // datastore
-    implementation Libs.dataStore
-
-    // retrofit
-    implementation Libs.retrofit2
-    implementation Libs.retrofit2Adapter
-    implementation Libs.okhttp3LoggInterceptor
-    implementation Libs.retrofit2ConverterGson
-
-    implementation Libs.bannerViewPager
-    implementation Libs.viewpager2
-    implementation Libs.coil
-
-    // Koin for Kotlin
-    implementation Libs.koinCore
-    // Koin for AndroidX
-    implementation Libs.koinAndroid
-    // Koin for navigation
-    implementation Libs.koinAndroidxNavigation
+    implementation project(path: ':module_home')
+    implementation project(path: ':module_project')
+    implementation project(path: ':module_navigation')
+    implementation project(path: ':module_mine')
+    implementation project(path: ':module_common')
 }

@@ -20,8 +20,9 @@ data class ArticleDetail(
     val title: String,
     val superChapterId: Int, // superChapterId其实不是一级分类id，因为要拼接跳转url，内容实际都挂在二级分类下，所以该id实际上是一级分类的第一个子类目的id，拼接后故可正常跳转。
     val superChapterName: String, // 一级分类的名称
-    val chapterName:String,
-    var collect: Boolean,
+    val chapterName: String,
+    val collect: Boolean,
+    val type: Int
 )
 
 data class ArticleTag(val name: String, val url: String)

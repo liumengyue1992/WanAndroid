@@ -1,7 +1,6 @@
 package com.lmy.ext
 
-import android.content.Context
-import com.lmy.BaseApplication
+import com.lmy.base.BaseApplication
 
 fun getStringRes(resId: Int): String = BaseApplication.mContext.getString(resId)
 

@@ -28,8 +28,8 @@ include(":module_home")
 include(":module_project")
 include(":module_navigation")
 include(":module_mine")
+include(":module_common")
 
 /**
  * 在Gradle5.0 版本之后，新加入了pluginManagement和dependencyResolutionManagement这两个功能，主要用于管理 Gradle 插件和依赖项的版本。
  */
-

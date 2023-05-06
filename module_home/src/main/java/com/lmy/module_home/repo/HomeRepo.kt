@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lmy.base.BaseRepository
 import com.lmy.module_home.api.HomeApi
 import com.lmy.module_home.bean.Article
+import com.lmy.module_home.bean.ArticleDetail
 import com.lmy.module_home.bean.BannerBean
 
 /**
@@ -12,7 +13,7 @@ import com.lmy.module_home.bean.BannerBean
  * @time： 2023/4/20 14:16
  */
 class HomeRepo(private val homeApi: HomeApi) : BaseRepository() {
-    
+
     suspend fun getBanner(data: MutableLiveData<List<BannerBean>>) = request(
         block = { homeApi.getBanner() },
         data,
@@ -20,12 +21,18 @@ class HomeRepo(private val homeApi: HomeApi) : BaseRepository() {
         fail = {
         },
         error = {
-        
+
         }
     )
-    
+
     suspend fun getHomeArticle(page: Int, pageSize: Int, data: MutableLiveData<Article>) = request(
         block = { homeApi.getHomeArticle(page, pageSize) },
         data
     )
+
+    suspend fun getHomeTopArticle(data: MutableLiveData<List<ArticleDetail>>) = request(
+        block = { homeApi.getHomeTopArticle() },
+        data
+    )
+
 }

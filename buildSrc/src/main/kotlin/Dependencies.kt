@@ -40,6 +40,8 @@ object Libs {
     private const val koinAndroidVersion = "3.4.0"
     private const val koinAndroidxNavVersion = "3.4.0"
     private const val smartRefreshLayoutVersion = "2.0.6"
+    private const val arouterApiVersion = "1.5.2"
+    private const val arouterCompilerVersion = "1.5.2"
 
     const val junit = "junit:junit:$junitVersion"
     const val testJunit = "androidx.test.ext:junit$testJunitVersion"
@@ -77,6 +79,9 @@ object Libs {
     const val smartRefreshLayout = "io.github.scwang90:refresh-layout-kernel:$smartRefreshLayoutVersion"
     // 经典刷新头
     const val  smartRefreshLayoutClassicsHeader = "io.github.scwang90:refresh-header-classics:$smartRefreshLayoutVersion"
+    // Arouter
+    const val arouterApi = "com.alibaba:arouter-api:$arouterApiVersion"
+    const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterCompilerVersion"
 }
 /**
  * 使用buildSrc构建版本的缺点：

@@ -1,0 +1,11 @@
+apply plugin: 'com.android.library'
+apply from: '../config.gradle'
+
+
+android {
+    namespace 'com.lmy.module_common'
+}
+
+dependencies {
+    implementation project(path: ':module_base')
+}

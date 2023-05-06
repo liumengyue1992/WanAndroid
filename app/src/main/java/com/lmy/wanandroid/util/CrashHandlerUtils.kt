@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Process
 import android.util.Log
+import com.lmy.base.BaseApplication
 import com.lmy.wanandroid.MyApplication
 import java.io.BufferedWriter
 import java.io.File
@@ -32,7 +33,7 @@ class CrashHandlerUtils private constructor() : Thread.UncaughtExceptionHandler 
         /**
          * 异常日志 存储位置为根目录下的 Crash文件夹
          */
-        val path = MyApplication.mContext.getExternalFilesDir("crash").toString()
+        val path = BaseApplication.mContext.getExternalFilesDir("crash").toString()
         
         /**
          * 文件名

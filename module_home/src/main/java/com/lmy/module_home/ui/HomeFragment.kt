@@ -1,6 +1,10 @@
 package com.lmy.module_home.ui
 
+import com.alibaba.android.arouter.launcher.ARouter
 import com.lmy.base.BaseVMFragment
+import com.lmy.module_common.PATH_WEB
+import com.lmy.module_common.WEB_LINK
+import com.lmy.module_common.WEB_TITLE
 import com.lmy.module_home.R
 import com.lmy.module_home.adapter.ArticleAdapter
 import com.lmy.module_home.adapter.BannerAdapter
@@ -18,13 +22,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     private val homeViewModel: HomeViewModel by viewModel()
     private lateinit var articleAdapter: ArticleAdapter
-    private val REFRESHTIME = 500
     private var currentPage = 0
     private val articleList: MutableList<ArticleDetail> = arrayListOf()
     override fun getLayoutId(): Int = R.layout.fragment_home
 
     override fun initData() {
         homeViewModel.getBannerData()
+        homeViewModel.getHomeTopArticle()
         homeViewModel.getHomeArticle(currentPage)
 
         binding.smartRefresh.setOnRefreshListener {
@@ -32,10 +36,10 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             it.setEnableLoadMore(true)
             articleList.clear()
             homeViewModel.getHomeArticle(currentPage)
+            homeViewModel.getHomeTopArticle()
         }
         binding.smartRefresh.setOnLoadMoreListener {
             currentPage += 1
-//            LogUtil.d("currentPage = $currentPage")
             homeViewModel.getHomeArticle(currentPage)
         }
 
@@ -44,8 +48,17 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             registerLifecycleObserver(lifecycle)
         }.create()
 
-        articleAdapter = ArticleAdapter()
-        binding.homeRec.adapter = articleAdapter
+        articleAdapter = ArticleAdapter().apply {
+            binding.homeRec.adapter = this
+            setOnItemClickListener {
+                LogUtil.d("link = " + it.link)
+                // 跳转并携带参数
+                ARouter.getInstance().build(PATH_WEB)
+                    .withString(WEB_LINK, it.link)
+                    .withString(WEB_TITLE, it.title)
+                    .navigation()
+            }
+        }
     }
 
     override fun initObserver() {
@@ -62,6 +75,12 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             if (it.datas.isNotEmpty()) {
                 LogUtil.d("currentPage = " + it.curPage + ", pageSize = " + it.size)
                 articleList.addAll(it.datas)
+                articleAdapter.setData(articleList)
+            }
+        }
+        homeViewModel.homeTopArticle.observe(this){
+            if (!it.isNullOrEmpty()){
+                articleList.addAll(0,it)
                 articleAdapter.setData(articleList)
             }
         }

@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.lmy.BaseApplication
+import com.lmy.base.BaseApplication
 import com.lmy.ext.setVisible
 import com.lmy.module_home.R
 import com.lmy.module_home.bean.ArticleDetail
@@ -50,7 +50,7 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ContentViewHolder) {
             val data = diff.currentList[position]
-//            holder.binding.tvArticleTop.visibility = data.
+            holder.binding.tvArticleTop.setVisible(data.type == 1)
             holder.binding.tvArticleFresh.setVisible(data.fresh)
             holder.binding.tvArticleTag.setVisible(data.tags.isNotEmpty())
             if (data.tags.isNotEmpty()) {
@@ -65,14 +65,28 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             holder.binding.tvArticleDate.text = data.niceDate
             holder.binding.tvArticleTitle.text = data.title
-            holder.binding.tvCategory.text = data.superChapterName + "/" + data.chapterName
+            // TODO: 优化
+//            holder.binding.tvCategory.text = data.superChapterName + "/" + data.chapterName
+            holder.binding.tvCategory.text = BaseApplication.mContext.getString(R.string.article_category,data.superChapterName,data.chapterName)
+
+            holder.itemView.setOnClickListener {
+                mOnItemClickListener?.invoke(diff.currentList[position])
+            }
         }
     }
+
+    // 条目点击事件
+    private var mOnItemClickListener: ((articleDetail: ArticleDetail) -> Unit)? = null
+    fun setOnItemClickListener(onItemClickListener: ((articleDetail: ArticleDetail) -> Unit)) {
+        this.mOnItemClickListener = onItemClickListener
+    }
+
 
     fun setData(article: List<ArticleDetail>) {
         // AsyncListDiffer需要一个新数据，不然添加无效
         diff.submitList(ArrayList(article))
     }
 
-    class ContentViewHolder(val binding: ItemHomeContentBinding) : RecyclerView.ViewHolder(binding.root)
+    class ContentViewHolder(val binding: ItemHomeContentBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

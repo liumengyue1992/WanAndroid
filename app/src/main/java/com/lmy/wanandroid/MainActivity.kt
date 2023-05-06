@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationBarView
 import com.lmy.base.BaseActivity
-import com.lmy.base.BaseVMActivity
 import com.lmy.module_home.ui.HomeFragment
 import com.lmy.module_mine.ui.MineFragment
 import com.lmy.module_navigation.ui.NavigationFragment
@@ -39,18 +38,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.itemId) {
                     R.id.nav_home -> binding.viewPager2.currentItem = 0
-                    
+
                     R.id.nav_project -> binding.viewPager2.currentItem = 1
-                    
+
                     R.id.nav_navigation -> binding.viewPager2.currentItem = 2
-                    
+
                     R.id.nav_mine -> binding.viewPager2.currentItem = 3
-                    
+
                 }
                 return true
             }
         })
-        
+
         // tips:【BottomNavigationView】自带小红点（角标）功能
     }
 }

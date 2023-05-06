@@ -7,7 +7,7 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
 import android.provider.Settings
-import com.lmy.BaseApplication
+import com.lmy.base.BaseApplication
 import com.lmy.wanandroid.util.NetworkCallback
 
 /**

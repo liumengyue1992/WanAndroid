@@ -1,7 +1,5 @@
 package com.lmy.module_navigation.viewmodel
 
-import android.app.Application
-import com.lmy.BaseApplication
 import com.lmy.base.BaseViewModel
 
 /**

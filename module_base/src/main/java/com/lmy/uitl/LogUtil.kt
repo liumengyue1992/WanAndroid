@@ -17,7 +17,13 @@ object LogUtil {
             Log.d(TAG, msg)
         }
     }
-    
+
+    fun dWithTag(tag: String,msg: String) {
+        if (isDebug) {
+            Log.d(tag, msg)
+        }
+    }
+
     /**
      * debug
      */
