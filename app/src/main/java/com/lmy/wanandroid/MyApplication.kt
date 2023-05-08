@@ -5,6 +5,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.Utils
 import com.lmy.base.BaseApplication
 import com.lmy.module_home.di.homeModule
+import com.lmy.module_project.di.projectMode
 import com.lmy.uitl.CrashHandlerUtils
 import com.lmy.uitl.isMainProcess
 import org.koin.android.ext.koin.androidContext
@@ -19,7 +20,7 @@ import org.koin.core.logger.Level
  * @time： 2022/4/21 11:20
  */
 class MyApplication : BaseApplication() {
-    private val modules = mutableListOf(homeModule)
+    private val modules = mutableListOf(homeModule, projectMode)
 
     override fun onCreate() {
         super.onCreate()

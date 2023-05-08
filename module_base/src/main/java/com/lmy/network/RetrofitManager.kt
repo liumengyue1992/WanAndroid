@@ -22,9 +22,9 @@ const val DEFAULT_TIMEOUT = 5000L
  */
 object RetrofitManager {
     private const val BASE_URL = "https://www.wanandroid.com/"
-    
+
     private var retrofit: Retrofit
-    
+
     init {
         val okHttpClient = OkHttpClient.Builder()
             .callTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -38,8 +38,10 @@ object RetrofitManager {
                 // if (BuildConfig.DEBUG) {
                 val loggingInterceptor = HttpLoggingInterceptor() { message ->
                     try {
-                        val text: String = URLDecoder.decode(message, "utf-8")
-                        Log.e("OKHttp-----", text)
+                        // 由于接口返回数据中有些带有特殊字符，如%，decode会报错
+                        // java.lang.IllegalArgumentException: URLDecoder: Illegal hex characters in escape (%) pattern : %界面
+                        // val text: String = URLDecoder.decode(message, "utf-8")
+                        Log.e("OKHttp-----", message)
                     } catch (e: UnsupportedEncodingException) {
                         e.printStackTrace()
                         Log.e("OKHttp-----", message)
@@ -49,14 +51,14 @@ object RetrofitManager {
                 addNetworkInterceptor(loggingInterceptor)
                 // }
             }.build()
-        
-         retrofit = Retrofit.Builder()
+
+        retrofit = Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-    
+
     fun <T> getService(service: Class<T>): T {
         return retrofit.create(service)
     }

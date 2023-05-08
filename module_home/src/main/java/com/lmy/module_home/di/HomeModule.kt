@@ -1,6 +1,5 @@
 package com.lmy.module_home.di
 
-import com.lmy.base.BaseApplication
 import com.lmy.module_home.api.HomeApi
 import com.lmy.module_home.repo.HomeRepo
 import com.lmy.module_home.viewmodel.HomeViewModel
@@ -19,6 +18,5 @@ import org.koin.dsl.module
 val homeModule = module {
     single { RetrofitManager.getService(HomeApi::class.java) }
     single { HomeRepo(get()) }
-//    single { BaseApplication() }
     viewModel { HomeViewModel(get()) }
 }

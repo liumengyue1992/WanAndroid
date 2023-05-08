@@ -65,8 +65,6 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             holder.binding.tvArticleDate.text = data.niceDate
             holder.binding.tvArticleTitle.text = data.title
-            // TODO: 优化
-//            holder.binding.tvCategory.text = data.superChapterName + "/" + data.chapterName
             holder.binding.tvCategory.text = BaseApplication.mContext.getString(R.string.article_category,data.superChapterName,data.chapterName)
 
             holder.itemView.setOnClickListener {

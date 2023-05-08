@@ -2,7 +2,7 @@
 <resources>
 
     <style name="DialogFragmentStyle" parent="@android:style/Theme.Dialog">
-        <item name="android:windowBackground">@color/transparent_color</item>
+        <item name="android:windowBackground">@color/transparent_75</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowIsTranslucent">true</item>
