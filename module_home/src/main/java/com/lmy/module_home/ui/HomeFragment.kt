@@ -78,9 +78,9 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                 articleAdapter.setData(articleList)
             }
         }
-        homeViewModel.homeTopArticle.observe(this){
-            if (!it.isNullOrEmpty()){
-                articleList.addAll(0,it)
+        homeViewModel.homeTopArticle.observe(this) {
+            if (!it.isNullOrEmpty()) {
+                articleList.addAll(0, it)
                 articleAdapter.setData(articleList)
             }
         }

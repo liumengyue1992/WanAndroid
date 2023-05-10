@@ -1,63 +1,77 @@
 package com.lmy.wanandroid
 
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
 import com.lmy.base.BaseActivity
 import com.lmy.module_home.ui.HomeFragment
 import com.lmy.module_mine.ui.MineFragment
 import com.lmy.module_navigation.ui.NavigationFragment
 import com.lmy.module_project.ui.ProjectFragment
-import com.lmy.wanandroid.adapter.ViewPager2Adapter
 import com.lmy.wanandroid.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val bottomTitleList = arrayListOf("首页", "项目", "导航", "我的")
 
+    private val homeFragment: HomeFragment by lazy { HomeFragment() }
+    private val projectFragment: ProjectFragment by lazy { ProjectFragment() }
+    private val navigationFragment: NavigationFragment by lazy { NavigationFragment() }
+    private val mineFragment: MineFragment by lazy { MineFragment() }
+
+    private var mCurrentFragment: Fragment? = null
     override fun getLayoutId(): Int = R.layout.activity_main
 
     override fun initData() {
+        switchFragment(homeFragment)
+
         // 去除自带的选中颜色,去除后文字和图片选择效果就是跟我们自定义的效果一样
         binding.bottomNav.itemIconTintList = null
-
-        val fragmentList: MutableList<Fragment> = ArrayList()
-        fragmentList.add(HomeFragment())
-        fragmentList.add(ProjectFragment())
-        fragmentList.add(NavigationFragment())
-        fragmentList.add(MineFragment())
-        binding.viewPager2.adapter = ViewPager2Adapter(this, fragmentList)
-
-        binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                binding.bottomNav.menu.getItem(position).isChecked = true
-            }
-        })
 
         binding.bottomNav.setOnItemSelectedListener { item ->
             var index = 0
             when (item.itemId) {
-                R.id.nav_home -> index = 0
-                R.id.nav_project -> index = 1
-                R.id.nav_navigation -> index = 2
-                R.id.nav_mine -> index = 3
+                R.id.nav_home -> {
+                    index = 0
+                    switchFragment(homeFragment)
+                }
+
+                R.id.nav_project -> {
+                    index = 1
+                    switchFragment(projectFragment)
+                }
+
+                R.id.nav_navigation -> {
+                    index = 2
+                    switchFragment(navigationFragment)
+                }
+
+                R.id.nav_mine -> {
+                    index = 3
+                    switchFragment(mineFragment)
+                }
             }
-            updateNav(index)
+            binding.tvTitle.text = bottomTitleList[index]
             true
         }
         // tips:【BottomNavigationView】自带小红点（角标）功能
-
-        binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                updateNav(position)
-            }
-        })
     }
 
-    private fun updateNav(index: Int) {
-        binding.tvTitle.text = bottomTitleList[index]
-        binding.viewPager2.currentItem = index
+    private fun switchFragment(fragment: Fragment) {
+        if (fragment !== mCurrentFragment) {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            mCurrentFragment?.let { fragmentTransaction.hide(it) }
+            if (!fragment.isAdded) {
+                // 存入Tag,以便获取，解决界面重叠问题 参考:http://blog.csdn.net/showdy/article/details/50825800
+                fragmentTransaction.add(
+                    R.id.fl_container,
+                    fragment,
+                    fragment.javaClass.simpleName
+                ).show(fragment)
+            } else {
+                fragmentTransaction.show(fragment)
+            }
+            fragmentTransaction.commitAllowingStateLoss()
+            mCurrentFragment = fragment
+        }
     }
 }
 

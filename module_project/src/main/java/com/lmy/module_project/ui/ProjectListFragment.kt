@@ -4,8 +4,10 @@ import android.os.Bundle
 import com.lmy.base.BaseVMFragment
 import com.lmy.module_project.R
 import com.lmy.module_project.adapter.ProjectAdapter
+import com.lmy.module_project.bean.ProjectDetail
 import com.lmy.module_project.databinding.FragmentProjectListBinding
 import com.lmy.module_project.viewmodel.ProjectViewModel
+import com.lmy.uitl.LogUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -14,14 +16,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @description：
  */
 class ProjectListFragment : BaseVMFragment<FragmentProjectListBinding>() {
-
+    private val tag = ProjectListFragment::class.java.simpleName
     private val projectViewModel: ProjectViewModel by viewModel()
-    private val currentPage = 1
+    private var currentPage = 1
     private lateinit var projectAdapter: ProjectAdapter
+    private var cid: Int = 0
+    private var projectDetails = mutableListOf<ProjectDetail>()
 
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_project_list
-    }
+    override fun getLayoutId(): Int = R.layout.fragment_project_list
 
     companion object {
         private const val KEY_CID = "cid"
@@ -34,20 +36,52 @@ class ProjectListFragment : BaseVMFragment<FragmentProjectListBinding>() {
         }
     }
 
-    override fun initData() {
+    override fun lazyLoad() {
         arguments.let {
-            val cid = it?.getInt(KEY_CID) ?: 0
+            cid = it?.getInt(KEY_CID) ?: 0
             projectViewModel.getProjectList(currentPage, cid = cid)
         }
+    }
 
+    override fun initData() {
         projectAdapter = ProjectAdapter().apply {
             binding.projectRec.adapter = this
+        }
+
+        binding.smartRefresh.setOnRefreshListener {
+            currentPage = 1
+            it.setEnableLoadMore(true)
+            projectDetails.clear()
+            LogUtil.dWithTag(tag, "refresh  cid = $cid")
+            projectViewModel.getProjectList(currentPage, cid = cid)
+        }
+        binding.smartRefresh.setOnLoadMoreListener {
+            currentPage++
+            projectViewModel.getProjectList(currentPage, cid = cid)
         }
     }
 
     override fun initObserver() {
-        projectViewModel.projectList.observe(this) {
-            projectAdapter.setData(it.datas)
+        // Setting the fragment as the LifecycleOwner might cause memory leaks because views lives shorter than the Fragment.
+        // Consider using Fragment's view lifecycle
+        projectViewModel.projectList.observe(viewLifecycleOwner) {
+            if (it.over) {
+                binding.smartRefresh.finishLoadMoreWithNoMoreData()
+            } else {
+                binding.smartRefresh.finishLoadMore()
+            }
+            if (binding.smartRefresh.isRefreshing) {
+                binding.smartRefresh.finishRefresh()
+            }
+            if (it.datas.isNotEmpty()) {
+                projectDetails.addAll(it.datas)
+                projectAdapter.setData(projectDetails)
+            }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        projectViewModel.projectList.removeObservers(viewLifecycleOwner)
     }
 }

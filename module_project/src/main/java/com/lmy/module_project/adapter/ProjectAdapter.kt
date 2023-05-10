@@ -47,7 +47,7 @@ class ProjectAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         if (holder is ProjectViewHolder) {
             val data = diff.currentList[position]
             holder.binding.ivProject.load(data.envelopePic)
-            LogUtil.d("link=========================="+data.link)
+//            LogUtil.d("link=========================="+data.link)
             holder.binding.tvTitle.text = data.title
             holder.binding.tvDes.text = data.desc
             holder.binding.tvAuthor.text = data.author

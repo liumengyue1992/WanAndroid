@@ -1,7 +1,6 @@
 package com.lmy.module_project.ui
 
 
-import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lmy.base.BaseVMFragment
 import com.lmy.module_project.R
@@ -30,19 +29,14 @@ class ProjectFragment : BaseVMFragment<FragmentProjectBinding>() {
 
 
     override fun initObserver() {
-        projectViewModel.projectType.observe(this) {
+        projectViewModel.projectType.observe(viewLifecycleOwner) {
             initTabLayout(it)
         }
     }
 
     private fun initTabLayout(projectTypes: List<ProjectType>) {
-        val childFragmentList: MutableList<Fragment> = arrayListOf()
-
-        projectTypes.forEachIndexed { _, projectType ->
-            childFragmentList.add(ProjectListFragment.newInstance(projectType.id))
-        }
-        binding.viewPager.adapter = ProjectVpAdapter(this, childFragmentList)
-
+        binding.viewPager.adapter = ProjectVpAdapter(this, projectTypes)
+        binding.viewPager.offscreenPageLimit = projectTypes.size - 2
         // 官方为我们提供了tabLayout+viewpager2的联动工具类：TabLayoutMediator
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             // tab包含特殊符号  日历&amp;时钟  音视频&amp;相机
@@ -52,5 +46,10 @@ class ProjectFragment : BaseVMFragment<FragmentProjectBinding>() {
                 tab.text = projectTypes[position].name
             }
         }.attach()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        projectViewModel.projectList.removeObservers(viewLifecycleOwner)
     }
 }

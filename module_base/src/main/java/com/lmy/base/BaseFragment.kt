@@ -39,7 +39,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
         initData()
     }
     
-    
     abstract fun getLayoutId(): Int
     
     open fun initData(){}
