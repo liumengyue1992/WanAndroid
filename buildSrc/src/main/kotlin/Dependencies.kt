@@ -42,6 +42,7 @@ object Libs {
     private const val smartRefreshLayoutVersion = "2.0.6"
     private const val arouterApiVersion = "1.5.2"
     private const val arouterCompilerVersion = "1.5.2"
+    private const val flexBoxVersion = "3.0.0"
 
     const val junit = "junit:junit:$junitVersion"
     const val testJunit = "androidx.test.ext:junit$testJunitVersion"
@@ -82,6 +83,8 @@ object Libs {
     // Arouter
     const val arouterApi = "com.alibaba:arouter-api:$arouterApiVersion"
     const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterCompilerVersion"
+    // FlexBox
+    const val flexBox = "com.google.android.flexbox:flexbox:$flexBoxVersion"
 }
 /**
  * 使用buildSrc构建版本的缺点：

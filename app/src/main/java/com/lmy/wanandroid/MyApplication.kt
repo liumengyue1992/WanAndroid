@@ -1,11 +1,12 @@
 package com.lmy.wanandroid
 
-import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.Utils
 import com.lmy.base.BaseApplication
 import com.lmy.module_home.di.homeModule
-import com.lmy.module_project.di.projectMode
+import com.lmy.module_mine.di.mineModule
+import com.lmy.module_navigation.di.navigationModule
+import com.lmy.module_project.di.projectModule
 import com.lmy.uitl.CrashHandlerUtils
 import com.lmy.uitl.isMainProcess
 import org.koin.android.ext.koin.androidContext
@@ -20,7 +21,7 @@ import org.koin.core.logger.Level
  * @time： 2022/4/21 11:20
  */
 class MyApplication : BaseApplication() {
-    private val modules = mutableListOf(homeModule, projectMode)
+    private val modules = mutableListOf(homeModule, projectModule, navigationModule, mineModule)
 
     override fun onCreate() {
         super.onCreate()

@@ -1,7 +1,11 @@
 package com.lmy.module_project.ui
 
 import android.os.Bundle
+import com.alibaba.android.arouter.launcher.ARouter
 import com.lmy.base.BaseVMFragment
+import com.lmy.module_common.PATH_WEB
+import com.lmy.module_common.WEB_LINK
+import com.lmy.module_common.WEB_TITLE
 import com.lmy.module_project.R
 import com.lmy.module_project.adapter.ProjectAdapter
 import com.lmy.module_project.bean.ProjectDetail
@@ -46,6 +50,12 @@ class ProjectListFragment : BaseVMFragment<FragmentProjectListBinding>() {
     override fun initData() {
         projectAdapter = ProjectAdapter().apply {
             binding.projectRec.adapter = this
+            setOnClickProjectItem { link, title ->
+                ARouter.getInstance().build(PATH_WEB)
+                    .withString(WEB_LINK, link)
+                    .withString(WEB_TITLE, title)
+                    .navigation()
+            }
         }
 
         binding.smartRefresh.setOnRefreshListener {

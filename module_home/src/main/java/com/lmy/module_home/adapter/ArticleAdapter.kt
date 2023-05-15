@@ -75,7 +75,7 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     // 条目点击事件
     private var mOnItemClickListener: ((articleDetail: ArticleDetail) -> Unit)? = null
-    fun setOnItemClickListener(onItemClickListener: ((articleDetail: ArticleDetail) -> Unit)) {
+    fun setOnItemClickListener(onItemClickListener: (articleDetail: ArticleDetail) -> Unit) {
         this.mOnItemClickListener = onItemClickListener
     }
 

@@ -12,7 +12,7 @@ import org.koin.dsl.module
  * @date: 2023/5/8
  * @description：
  */
-val projectMode = module {
+val projectModule = module {
     single { RetrofitManager.getService(ProjectApi::class.java) }
     single { ProjectRepo(get()) }
     viewModel { ProjectViewModel(get()) }

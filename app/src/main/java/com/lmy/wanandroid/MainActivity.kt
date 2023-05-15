@@ -2,6 +2,7 @@ package com.lmy.wanandroid
 
 import androidx.fragment.app.Fragment
 import com.lmy.base.BaseActivity
+import com.lmy.module_home.ext.clearLongClickToast
 import com.lmy.module_home.ui.HomeFragment
 import com.lmy.module_mine.ui.MineFragment
 import com.lmy.module_navigation.ui.NavigationFragment
@@ -26,6 +27,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         // 去除自带的选中颜色,去除后文字和图片选择效果就是跟我们自定义的效果一样
         binding.bottomNav.itemIconTintList = null
 
+        binding.bottomNav.clearLongClickToast(
+            mutableListOf(
+                R.id.nav_home,
+                R.id.nav_project,
+                R.id.nav_navigation,
+                R.id.nav_mine
+            )
+        )
         binding.bottomNav.setOnItemSelectedListener { item ->
             var index = 0
             when (item.itemId) {

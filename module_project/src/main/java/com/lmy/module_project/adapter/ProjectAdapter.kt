@@ -1,5 +1,6 @@
 package com.lmy.module_project.adapter
 
+import android.icu.text.CaseMap.Title
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,7 +11,6 @@ import coil.load
 import com.lmy.module_project.R
 import com.lmy.module_project.bean.ProjectDetail
 import com.lmy.module_project.databinding.ItemProjectBinding
-import com.lmy.uitl.LogUtil
 
 /**
  * @author: mengyue.liu
@@ -47,18 +47,25 @@ class ProjectAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         if (holder is ProjectViewHolder) {
             val data = diff.currentList[position]
             holder.binding.ivProject.load(data.envelopePic)
-//            LogUtil.d("link=========================="+data.link)
             holder.binding.tvTitle.text = data.title
             holder.binding.tvDes.text = data.desc
             holder.binding.tvAuthor.text = data.author
             holder.binding.tvTime.text = data.niceDate
+            holder.itemView.setOnClickListener {
+                onClickProjectItem?.invoke(data.link,data.title)
+            }
         }
     }
 
-    fun setData(projectData:List<ProjectDetail>){
-        diff.submitList(ArrayList(projectData))
+    private var onClickProjectItem: ((link: String,title:String) -> Unit)? = null
+
+    fun setOnClickProjectItem(onClickProjectItemListener: (link: String,title:String) -> Unit) {
+        this.onClickProjectItem = onClickProjectItemListener
     }
 
+    fun setData(projectData: List<ProjectDetail>) {
+        diff.submitList(ArrayList(projectData))
+    }
 
     class ProjectViewHolder(val binding: ItemProjectBinding) : RecyclerView.ViewHolder(binding.root)
 }

@@ -98,4 +98,6 @@ dependencies {
 
     implementation Libs.arouterApi
     kapt Libs.arouterCompiler
+
+    implementation Libs.flexBox
 }

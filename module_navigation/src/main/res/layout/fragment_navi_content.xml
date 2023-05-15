@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/Grey200"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/NestedScrollView"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:orientation="vertical"
+                android:id="@+id/ll_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingBottom="@dimen/dp_4"
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/NestedScrollView" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
