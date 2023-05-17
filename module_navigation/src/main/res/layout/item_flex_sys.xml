@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="@dimen/dp_4"
+        android:paddingHorizontal="@dimen/dp_6"
+        android:textColor="@color/item_title"
+        android:textSize="@dimen/item_tv_via"
+        tools:text="常用网站"/>
+
+</RelativeLayout>

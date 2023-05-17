@@ -19,11 +19,10 @@ class HomeRepo(private val homeApi: HomeApi) : BaseRepository() {
         data,
         // fail及error参数皆可为空，如需要，可以传递到HomeViewModel中赋值给对应的liveData,然后在activity/fragment中进行个性化异常处理
         fail = {
-        },
-        error = {
-
         }
-    )
+    ) {
+
+    }
 
     suspend fun getHomeArticle(page: Int, pageSize: Int, data: MutableLiveData<Article>) = request(
         block = { homeApi.getHomeArticle(page, pageSize) },

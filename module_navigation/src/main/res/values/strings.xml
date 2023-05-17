@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">module_navigation</string>
+
+
+    <string name="author">作者：%1$s</string>
+    <string name="shareUser">分享人：%1$s</string>
+
+    <string name="article_category">%1$s&#047;%2$s</string>
 </resources>

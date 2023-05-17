@@ -1,4 +1,4 @@
-package com.lmy.module_home.adapter
+package com.lmy.module_navigation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lmy.base.BaseApplication
 import com.lmy.ext.setGone
-import com.lmy.module_home.R
 import com.lmy.module_home.bean.ArticleDetail
-import com.lmy.module_home.databinding.ItemHomeContentBinding
+import com.lmy.module_navigation.R
+import com.lmy.module_navigation.databinding.ItemSysArticleBinding
 
 /**
  * @description：
@@ -33,9 +33,9 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     })
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflate = DataBindingUtil.inflate<ItemHomeContentBinding>(
+        val inflate = DataBindingUtil.inflate<ItemSysArticleBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.item_home_content,
+            R.layout.item_sys_article,
             parent,
             false
         )
@@ -50,12 +50,6 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ContentViewHolder) {
             val data = diff.currentList[position]
-            holder.binding.tvArticleTop.setGone(data.type == 1)
-            holder.binding.tvArticleFresh.setGone(data.fresh)
-            holder.binding.tvArticleTag.setGone(data.tags.isNotEmpty())
-            if (data.tags.isNotEmpty()) {
-                holder.binding.tvArticleTag.text = data.tags[0].name
-            }
             if (data.author.isNotEmpty()) {
                 holder.binding.tvArticleAuthor.text =
                     BaseApplication.mContext.getString(R.string.author, data.author)
@@ -85,6 +79,6 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         diff.submitList(ArrayList(article))
     }
 
-    class ContentViewHolder(val binding: ItemHomeContentBinding) :
+    class ContentViewHolder(val binding: ItemSysArticleBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

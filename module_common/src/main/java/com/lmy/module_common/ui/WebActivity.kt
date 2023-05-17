@@ -1,9 +1,7 @@
 package com.lmy.module_common.ui
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -11,7 +9,7 @@ import android.webkit.WebViewClient
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.lmy.base.BaseActivity
 import com.lmy.base.BaseApplication
-import com.lmy.ext.setVisible
+import com.lmy.ext.setGone
 import com.lmy.module_common.PATH_WEB
 import com.lmy.module_common.R
 import com.lmy.module_common.WEB_LINK
@@ -97,7 +95,7 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
                 LogUtil.dWithTag(TAG, "onProgressChanged:$newProgress")
                 binding.progressBar.progress = newProgress
                 if (newProgress == 100) {
-                    binding.progressBar.setVisible(false)
+                    binding.progressBar.setGone(false)
                 }
             }
         }

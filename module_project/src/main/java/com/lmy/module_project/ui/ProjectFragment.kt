@@ -36,7 +36,7 @@ class ProjectFragment : BaseVMFragment<FragmentProjectBinding>() {
 
     private fun initTabLayout(projectTypes: List<ProjectType>) {
         binding.viewPager.adapter = ProjectVpAdapter(this, projectTypes)
-        binding.viewPager.offscreenPageLimit = projectTypes.size - 2
+        binding.viewPager.offscreenPageLimit = projectTypes.size - 1
         // 官方为我们提供了tabLayout+viewpager2的联动工具类：TabLayoutMediator
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             // tab包含特殊符号  日历&amp;时钟  音视频&amp;相机

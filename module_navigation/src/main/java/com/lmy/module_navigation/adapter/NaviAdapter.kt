@@ -50,7 +50,7 @@ class NaviAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 holder.binding.flex.removeAllViews()
                 articles.forEachIndexed { index, naviChild ->
                     val flex = LayoutInflater.from(holder.itemView.context)
-                        .inflate(R.layout.item_flex, null, false)
+                        .inflate(R.layout.item_flex_navi, null, false)
                     val tvTitle = flex.findViewById<TextView>(R.id.tv_title)
                     tvTitle.text = naviChild.title
 
