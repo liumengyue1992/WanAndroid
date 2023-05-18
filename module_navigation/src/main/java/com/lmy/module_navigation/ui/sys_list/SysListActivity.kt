@@ -5,6 +5,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lmy.base.BaseVMActivity
 import com.lmy.module_navigation.R
+import com.lmy.module_navigation.bean.Sys
 import com.lmy.module_navigation.bean.SysChild
 import com.lmy.module_navigation.databinding.ActivitySysListBinding
 
@@ -16,13 +17,17 @@ import com.lmy.module_navigation.databinding.ActivitySysListBinding
 class SysListActivity : BaseVMActivity<ActivitySysListBinding>() {
 
     companion object {
-        const val key_ids = "id_list"
+        const val key_sys = "sys"
     }
 
     override fun getLayoutId(): Int = R.layout.activity_sys_list
 
     override fun initData() {
-        val sysChildList = intent?.getParcelableArrayListExtra<SysChild>(key_ids)
+        binding.ivBack.setOnClickListener { finish() }
+
+        val sys = intent?.getParcelableExtra<Sys>(key_sys)
+        binding.tvTitle.text = sys?.name
+        val sysChildList = sys?.children
         if (sysChildList.isNullOrEmpty()) return
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {

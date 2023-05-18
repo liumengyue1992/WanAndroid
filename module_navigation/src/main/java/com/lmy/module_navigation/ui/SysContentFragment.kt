@@ -4,10 +4,9 @@ import android.content.Intent
 import com.lmy.base.BaseVMFragment
 import com.lmy.module_navigation.R
 import com.lmy.module_navigation.adapter.SysAdapter
-import com.lmy.module_navigation.bean.SysChild
+import com.lmy.module_navigation.bean.Sys
 import com.lmy.module_navigation.databinding.FragmentSysContentBinding
 import com.lmy.module_navigation.ui.sys_list.SysListActivity
-import java.util.ArrayList
 
 /**
  * @author: mengyue.liu
@@ -18,20 +17,16 @@ class SysContentFragment : BaseVMFragment<FragmentSysContentBinding>() {
 
     private lateinit var naviFragment: NavigationFragment
     private lateinit var sysAdapter: SysAdapter
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_sys_content
-    }
+    override fun getLayoutId(): Int = R.layout.fragment_sys_content
+
 
     override fun initData() {
         naviFragment = parentFragment as NavigationFragment
-
         sysAdapter = SysAdapter().apply {
             binding.rec.adapter = this
-            setOnClickItemListener { sysChildList: List<SysChild> ->
+            setOnClickItemListener { sys: Sys ->
                 val intent = Intent(context,SysListActivity::class.java)
-//                val idList = sysChildList.map { it.id }
-//                intent.putIntegerArrayListExtra(SysListActivity.key_ids, ArrayList(idList) )
-                intent.putParcelableArrayListExtra(SysListActivity.key_ids, ArrayList(sysChildList) )
+                intent.putExtra(SysListActivity.key_sys, sys)
                 startActivity(intent)
             }
         }

@@ -1,7 +1,12 @@
 package com.lmy.module_navigation.ui.sys_list
 
 import android.os.Bundle
+import com.alibaba.android.arouter.launcher.ARouter
 import com.lmy.base.BaseVMFragment
+import com.lmy.module_common.PATH_WEB
+import com.lmy.module_common.WEB_LINK
+import com.lmy.module_common.WEB_TITLE
+import com.lmy.module_home.bean.ArticleDetail
 import com.lmy.module_navigation.R
 import com.lmy.module_navigation.adapter.ArticleAdapter
 import com.lmy.module_navigation.databinding.FragmentSysListBinding
@@ -16,7 +21,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SysListFragment : BaseVMFragment<FragmentSysListBinding>() {
     private val navigationViewMode: NavigationViewModel by viewModel()
     private lateinit var sysArticleAdapter: ArticleAdapter
-    private val page = 0
+    private var currentPage = 0
+    private var id = -1
+    private val articleList: MutableList<ArticleDetail> = arrayListOf()
+
     companion object {
         private const val key_id = "id"
         fun newInstance(id: Int): SysListFragment {
@@ -33,24 +41,48 @@ class SysListFragment : BaseVMFragment<FragmentSysListBinding>() {
     }
 
     override fun lazyLoad() {
-        val id = arguments?.getInt(key_id)
-        id?.let {
-            navigationViewMode.getSysArticleList(it,page)
+        arguments?.let {
+            id = it.getInt(key_id)
+            navigationViewMode.getSysArticleList(id, currentPage)
         }
     }
 
     override fun initData() {
-        sysArticleAdapter = ArticleAdapter().apply{
+        binding.smartRefresh.setOnRefreshListener {
+            currentPage = 0
+            it.setEnableLoadMore(true)
+            articleList.clear()
+            navigationViewMode.getSysArticleList(id, currentPage)
+        }
+        binding.smartRefresh.setOnLoadMoreListener {
+            currentPage++
+            navigationViewMode.getSysArticleList(id, currentPage)
+        }
+        sysArticleAdapter = ArticleAdapter().apply {
             binding.rec.adapter = this
             setOnItemClickListener {
-
+                ARouter.getInstance().build(PATH_WEB)
+                    .withString(WEB_TITLE, it.title)
+                    .withString(WEB_LINK, it.link)
+                    .navigation()
             }
         }
     }
 
     override fun initObserver() {
-        navigationViewMode.sysArticleList.observe(this){
-            sysArticleAdapter.setData(it.datas)
+        navigationViewMode.sysArticleList.observe(this) {
+            if (it.over) {
+                binding.smartRefresh.finishLoadMoreWithNoMoreData()
+            } else {
+                binding.smartRefresh.finishLoadMore()
+            }
+            if (binding.smartRefresh.isRefreshing) {
+                binding.smartRefresh.finishRefresh()
+            }
+            if (it.datas.isNotEmpty()) {
+                articleList.addAll(it.datas)
+                sysArticleAdapter.setData(articleList)
+            }
         }
     }
 }

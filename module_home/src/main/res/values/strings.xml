@@ -10,6 +10,7 @@
     <string name="shareUser">分享人：%1$s</string>
 
     <string name="article_category">%1$s&#047;%2$s</string>
+    <string name="home">首页</string>
 </resources>
 
 <!--Android资源文件strings实现特殊字符转义:https://www.jianshu.com/p/39400832f505/-->

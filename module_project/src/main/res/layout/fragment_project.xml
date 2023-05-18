@@ -20,7 +20,7 @@
             android:layout_height="60dp"
             android:background="@color/color_d4237a"
             app:layout_constraintTop_toTopOf="parent"
-            app:tabIndicatorColor="@color/color_d4237a"
+            app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="1dp"
             app:tabGravity="start"
             app:tabMode="scrollable"

@@ -63,14 +63,14 @@ class SysAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.binding.viewLine.setVisible(position != diff.currentList.size - 1)
 
             holder.itemView.setOnClickListener {
-                onClickItemListener?.invoke(diff.currentList[position].children)
+                onClickItemListener?.invoke(diff.currentList[position])
             }
         }
     }
 
-    private var onClickItemListener: ((sysChild: List<SysChild>) -> Unit)? = null
+    private var onClickItemListener: ((sys:Sys) -> Unit)? = null
 
-    fun setOnClickItemListener(listener: (sysChild: List<SysChild>) -> Unit) {
+    fun setOnClickItemListener(listener: (sys:Sys) -> Unit) {
         this.onClickItemListener = listener
     }
 

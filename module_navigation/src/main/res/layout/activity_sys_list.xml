@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,28 +11,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        添加一个title+返回键-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/color_d4237a"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="13dp"
+                android:src="@drawable/ic_arrow_left_white" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                tools:text="@string/title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_18" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:background="@color/color_d4237a"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_title"
+            app:tabGravity="start"
             app:tabIndicatorColor="@color/color_d4237a"
             app:tabIndicatorHeight="1dp"
-            app:tabGravity="start"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/Grey400"
             app:tabUnboundedRipple="true" />
 
         <androidx.viewpager2.widget.ViewPager2
-            app:layout_constraintTop_toBottomOf="@id/tab_layout"
             android:id="@+id/view_pager"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

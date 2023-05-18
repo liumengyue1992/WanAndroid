@@ -58,7 +58,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     switchFragment(mineFragment)
                 }
             }
-            binding.tvTitle.text = bottomTitleList[index]
             true
         }
         // tips:【BottomNavigationView】自带小红点（角标）功能

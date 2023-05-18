@@ -62,7 +62,6 @@ class ProjectListFragment : BaseVMFragment<FragmentProjectListBinding>() {
             currentPage = 1
             it.setEnableLoadMore(true)
             projectDetails.clear()
-            LogUtil.dWithTag(tag, "refresh  cid = $cid")
             projectViewModel.getProjectList(currentPage, cid = cid)
         }
         binding.smartRefresh.setOnLoadMoreListener {

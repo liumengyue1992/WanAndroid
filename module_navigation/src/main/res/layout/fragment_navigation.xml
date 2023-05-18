@@ -19,10 +19,10 @@
             android:layout_height="60dp"
             android:background="@color/color_d4237a"
             app:layout_constraintTop_toTopOf="parent"
-            app:tabIndicatorColor="@color/color_d4237a"
+            app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="1dp"
-            app:tabGravity="start"
-            app:tabMode="scrollable"
+            app:tabGravity="center"
+            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/Grey400"
             app:tabUnboundedRipple="true" />
