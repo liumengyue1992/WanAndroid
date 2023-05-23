@@ -3,15 +3,14 @@ package com.lmy.module_project.ui
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
 import com.lmy.base.BaseVMFragment
-import com.lmy.module_common.PATH_WEB
-import com.lmy.module_common.WEB_LINK
-import com.lmy.module_common.WEB_TITLE
+import com.lmy.constant.PATH_WEB
+import com.lmy.constant.WEB_LINK
+import com.lmy.constant.WEB_TITLE
 import com.lmy.module_project.R
 import com.lmy.module_project.adapter.ProjectAdapter
 import com.lmy.module_project.bean.ProjectDetail
 import com.lmy.module_project.databinding.FragmentProjectListBinding
 import com.lmy.module_project.viewmodel.ProjectViewModel
-import com.lmy.uitl.LogUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**

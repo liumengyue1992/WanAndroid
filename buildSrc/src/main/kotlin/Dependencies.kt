@@ -38,11 +38,12 @@ object Libs {
     private const val coilVersion = "2.3.0"
     private const val koinCoreVersion = "3.4.0"
     private const val koinAndroidVersion = "3.4.0"
-    private const val koinAndroidxNavVersion = "3.4.0"
     private const val smartRefreshLayoutVersion = "2.0.6"
     private const val arouterApiVersion = "1.5.2"
     private const val arouterCompilerVersion = "1.5.2"
     private const val flexBoxVersion = "3.0.0"
+    private const val activityKtxVersion = "1.6.1"
+    private const val fragmentKtxVersion = "1.6.1"
 
     const val junit = "junit:junit:$junitVersion"
     const val testJunit = "androidx.test.ext:junit$testJunitVersion"
@@ -74,8 +75,7 @@ object Libs {
     const val koinCore = "io.insert-koin:koin-core:$koinCoreVersion"
     // Koin for Android
     const val koinAndroid = "io.insert-koin:koin-android:$koinAndroidVersion"
-    // Navigation Graph
-    const val koinAndroidxNavigation = "io.insert-koin:koin-androidx-navigation:$koinAndroidxNavVersion"
+
     // smartRefreshLayout
     const val smartRefreshLayout = "io.github.scwang90:refresh-layout-kernel:$smartRefreshLayoutVersion"
     // 经典刷新头
@@ -85,6 +85,10 @@ object Libs {
     const val arouterCompiler = "com.alibaba:arouter-compiler:$arouterCompilerVersion"
     // FlexBox
     const val flexBox = "com.google.android.flexbox:flexbox:$flexBoxVersion"
+
+    // Activity ktx
+    const val activityKtx = "androidx.activity:activity-ktx:$activityKtxVersion"
+    const val fragmentKtx = "androidx.activity:activity-ktx:$fragmentKtxVersion"
 }
 /**
  * 使用buildSrc构建版本的缺点：

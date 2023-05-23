@@ -90,8 +90,6 @@ dependencies {
     implementation Libs.koinCore
     // Koin for AndroidX
     implementation Libs.koinAndroid
-    // Koin for navigation
-    implementation Libs.koinAndroidxNavigation
 
     implementation Libs.smartRefreshLayout
     implementation Libs.smartRefreshLayoutClassicsHeader
@@ -100,4 +98,7 @@ dependencies {
     kapt Libs.arouterCompiler
 
     implementation Libs.flexBox
+
+    implementation Libs.activityKtx
+    implementation Libs.fragmentKtx
 }

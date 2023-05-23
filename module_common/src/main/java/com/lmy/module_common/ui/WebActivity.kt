@@ -10,10 +10,10 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.lmy.base.BaseActivity
 import com.lmy.base.BaseApplication
 import com.lmy.ext.setGone
-import com.lmy.module_common.PATH_WEB
+import com.lmy.constant.PATH_WEB
 import com.lmy.module_common.R
-import com.lmy.module_common.WEB_LINK
-import com.lmy.module_common.WEB_TITLE
+import com.lmy.constant.WEB_LINK
+import com.lmy.constant.WEB_TITLE
 import com.lmy.module_common.databinding.ActivityWebBinding
 import com.lmy.uitl.LogUtil
 
@@ -35,11 +35,10 @@ class WebActivity : BaseActivity<ActivityWebBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_web
 
     override fun initData() {
-        binding.ivBack.setOnClickListener { finish() }
         if (intent == null) {
             return
         }
-        binding.txWebTitle.text = intent.getStringExtra(WEB_TITLE)
+        intent.getStringExtra(WEB_TITLE)?.let { binding.titleBar.setTitle(it) }
         initWebView()
     }
 

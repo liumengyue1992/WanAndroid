@@ -16,5 +16,6 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':module_common')
 
 }

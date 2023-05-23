@@ -3,10 +3,10 @@ package com.lmy.module_navigation.ui.sys_list
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
 import com.lmy.base.BaseVMFragment
-import com.lmy.module_common.PATH_WEB
-import com.lmy.module_common.WEB_LINK
-import com.lmy.module_common.WEB_TITLE
-import com.lmy.module_home.bean.ArticleDetail
+import com.lmy.constant.PATH_WEB
+import com.lmy.constant.WEB_LINK
+import com.lmy.constant.WEB_TITLE
+import com.lmy.module_common.bean.ArticleDetail
 import com.lmy.module_navigation.R
 import com.lmy.module_navigation.adapter.ArticleAdapter
 import com.lmy.module_navigation.databinding.FragmentSysListBinding

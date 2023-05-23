@@ -3,8 +3,8 @@ package com.lmy.module_home.repo
 import androidx.lifecycle.MutableLiveData
 import com.lmy.base.BaseRepository
 import com.lmy.module_home.api.HomeApi
-import com.lmy.module_home.bean.Article
-import com.lmy.module_home.bean.ArticleDetail
+import com.lmy.module_common.bean.Article
+import com.lmy.module_common.bean.ArticleDetail
 import com.lmy.module_home.bean.BannerBean
 
 /**
@@ -33,5 +33,11 @@ class HomeRepo(private val homeApi: HomeApi) : BaseRepository() {
         block = { homeApi.getHomeTopArticle() },
         data
     )
+
+    suspend fun collect(id: Int, collectResult: MutableLiveData<String>) {
+        request(block = {
+            homeApi.collect(id)
+        }, collectResult)
+    }
 
 }

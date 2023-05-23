@@ -2,7 +2,10 @@ package com.lmy.base
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.ToastUtils
+import com.lmy.constant.PATH_LOGIN
+import com.lmy.constant.PATH_WEB
 import com.lmy.network.BaseResult
 import com.lmy.uitl.LogUtil
 import com.lmy.uitl.ToastUtil
@@ -16,7 +19,7 @@ import java.net.UnknownHostException
  * @time： 2023/4/20 17:28
  */
 open class BaseRepository {
-    
+
     /**
      * 网络请求封装
      * @param block SuspendFunction0<BaseResult<T>> 请求体
@@ -35,22 +38,25 @@ open class BaseRepository {
         },
     ) {
         try {
-            
+
             //-------网络请求---------//
             val result = block.invoke()
             //-------网络请求---------//
-            
+
             when (result.errorCode) {
                 BaseResult.CODE_SUCCESS -> {
-                    if (result.data != null) {
-                        liveData?.value = result.data
-                    }
+                    // 有些Post接口并没有返回值，如收藏：{"data":null,"errorCode":0,"errorMsg":""}
+//                    if (result.data != null) {
+                    liveData?.value = result.data
+//                    }
                 }
+
                 BaseResult.CODE_LOGIN_FAILED -> {
                     onFail(result)
                     ToastUtil.showShort("认证过期，请重新登录！")
-                    // TODO: 统一跳转到重新登录的页面
+                    ARouter.getInstance().build(PATH_LOGIN).navigation()
                 }
+
                 else -> {
                     onFail(result)
                     ToastUtil.showShort("code:" + result.errorCode.toString() + " / msg:" + result.errorMsg)
@@ -67,13 +73,14 @@ open class BaseRepository {
                     //网络error
                     ToastUtil.showShort("网络错误！")
                 }
+
                 else -> {
                     ToastUtil.showShort("未知错误！")
                 }
             }
         }
     }
-    
+
     /**
      * 对网络请求失败的统一处理，调用方也可以自行传参进行个性化处理
      * @param result BaseResult<T>
@@ -82,7 +89,7 @@ open class BaseRepository {
         LogUtil.d("onFail->${result}")
         ToastUtils.showShort("errorCode = " + result.errorCode + "errorMsg = " + result.errorMsg)
     }
-    
+
     /**
      * 对网络请求错误的统一处理，调用方也可以自行传参进行个性化处理
      * @param exception Exception

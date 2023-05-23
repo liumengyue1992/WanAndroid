@@ -34,6 +34,7 @@ object RetrofitManager {
             .retryOnConnectionFailure(true)
             // .addInterceptor(HeaderIntercept())
             .followRedirects(false)
+            .cookieJar(MyCookie())
             .apply {
                 // if (BuildConfig.DEBUG) {
                 val loggingInterceptor = HttpLoggingInterceptor() { message ->

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lmy.base.BaseApplication
 import com.lmy.ext.setGone
 import com.lmy.module_home.R
-import com.lmy.module_home.bean.ArticleDetail
+import com.lmy.module_common.bean.ArticleDetail
 import com.lmy.module_home.databinding.ItemHomeContentBinding
 
 /**
@@ -65,10 +65,17 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             holder.binding.tvArticleDate.text = data.niceDate
             holder.binding.tvArticleTitle.text = data.title
-            holder.binding.tvCategory.text = BaseApplication.mContext.getString(R.string.article_category,data.superChapterName,data.chapterName)
+            holder.binding.tvCategory.text = BaseApplication.mContext.getString(
+                R.string.article_category,
+                data.superChapterName,
+                data.chapterName
+            )
 
             holder.itemView.setOnClickListener {
                 mOnItemClickListener?.invoke(diff.currentList[position])
+            }
+            holder.binding.ivCollect.setOnClickListener {
+                mOnClickCollectListener?.invoke(diff.currentList[position].id)
             }
         }
     }
@@ -77,6 +84,11 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var mOnItemClickListener: ((articleDetail: ArticleDetail) -> Unit)? = null
     fun setOnItemClickListener(onItemClickListener: (articleDetail: ArticleDetail) -> Unit) {
         this.mOnItemClickListener = onItemClickListener
+    }
+
+    private var mOnClickCollectListener: ((id: Int) -> Unit)? = null
+    fun setOnClickCollectListener(listener: ((id: Int) -> Unit)) {
+        this.mOnClickCollectListener = listener
     }
 
 

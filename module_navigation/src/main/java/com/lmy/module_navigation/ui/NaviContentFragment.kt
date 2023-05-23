@@ -7,9 +7,9 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.lmy.base.BaseVMFragment
-import com.lmy.module_common.PATH_WEB
-import com.lmy.module_common.WEB_LINK
-import com.lmy.module_common.WEB_TITLE
+import com.lmy.constant.PATH_WEB
+import com.lmy.constant.WEB_LINK
+import com.lmy.constant.WEB_TITLE
 import com.lmy.module_navigation.R
 import com.lmy.module_navigation.adapter.NaviAdapter
 import com.lmy.module_navigation.bean.Navi

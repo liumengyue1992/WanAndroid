@@ -13,6 +13,13 @@ android {
         targetSdk BuildVersion.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -53,4 +60,8 @@ dependencies {
     implementation Libs.dataStore
 
     implementation Libs.smartRefreshLayout
+
+    // BaseRepository中需要处理统一登录问题，故把Arouter下沉到module_base中
+    implementation Libs.arouterApi
+    kapt Libs.arouterCompiler
 }

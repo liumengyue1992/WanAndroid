@@ -1,6 +1,6 @@
 package com.lmy.module_navigation.api
 
-import com.lmy.module_home.bean.Article
+import com.lmy.module_common.bean.Article
 import com.lmy.module_navigation.bean.Navi
 import com.lmy.module_navigation.bean.Sys
 import com.lmy.network.BaseResult

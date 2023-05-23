@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lmy.base.BaseApplication
-import com.lmy.ext.setGone
-import com.lmy.module_home.bean.ArticleDetail
+import com.lmy.module_common.bean.ArticleDetail
 import com.lmy.module_navigation.R
 import com.lmy.module_navigation.databinding.ItemSysArticleBinding
 

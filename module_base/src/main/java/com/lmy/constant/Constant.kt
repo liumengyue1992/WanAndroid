@@ -1,4 +1,4 @@
-package com.lmy.module_common
+package com.lmy.constant
 
 /**
  * @author: mengyue.liu
@@ -11,3 +11,6 @@ const val PATH_WEB = "/module_common/WebActivity"
 
 const val WEB_TITLE: String = "web_title"
 const val WEB_LINK: String = "web_link"
+
+
+const val PATH_LOGIN = "/module_mine/LoginActivity"

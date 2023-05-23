@@ -1,4 +1,4 @@
-package com.lmy.module_home.bean
+package com.lmy.module_common.bean
 
 data class Article(
     val datas: List<ArticleDetail>,

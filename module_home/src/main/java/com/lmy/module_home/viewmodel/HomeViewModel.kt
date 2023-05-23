@@ -2,8 +2,8 @@ package com.lmy.module_home.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.lmy.base.BaseViewModel
-import com.lmy.module_home.bean.Article
-import com.lmy.module_home.bean.ArticleDetail
+import com.lmy.module_common.bean.Article
+import com.lmy.module_common.bean.ArticleDetail
 import com.lmy.module_home.bean.BannerBean
 import com.lmy.module_home.repo.HomeRepo
 
@@ -18,6 +18,7 @@ class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
     var bannerList = MutableLiveData<List<BannerBean>>()
     var homeArticle = MutableLiveData<Article>()
     var homeTopArticle = MutableLiveData<List<ArticleDetail>>()
+    val collectResult = MutableLiveData<String>()
 
     fun getBannerData() = launch { repo.getBanner(bannerList) }
 
@@ -26,5 +27,10 @@ class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
 
     fun getHomeTopArticle() {
         launch { repo.getHomeTopArticle(homeTopArticle) }
+    }
+
+    fun collect(id: Int) {
+        launch { repo.collect(id,collectResult) }
+
     }
 }

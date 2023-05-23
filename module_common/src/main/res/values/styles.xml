@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--报错：D:\myself\WanAndroid\app\build\intermediates\incremental\debug\mergeDebugResources\merged.dir\values\values.xml.
+Cause: java.nio.file.InvalidPathException: Illegal char <:> at index 45: com.lmy.wanandroid.app-mergeDebugResources-60:
+/values/values.xml). Check logs for more details.-->
+<!--解决办法：找到 D:\myself\WanAndroid\app\build\intermediates\incremental\debug\mergeDebugResources\merged.dir\values\values.xml
+ 发现：
+   <string name="title">标题</string>
+    <style name="Theme.WanAndroid" parent="android:Theme.Material.Light.NoActionBar"/>
+    <declare-styleable name="TitleBar">
+        <attr format="string" name="title"/>
+        <attr format="string" name="content"/>
+    </declare-styleable>
+
+  我们已经定义过一个title,这里起了冲突，所以下面attr中的属性不能再定义为title了
+  改成bar_title
+
+ -->
+    <declare-styleable name="TitleBar">
+        <attr name="bar_title" format="string" />
+        <attr name="bar_content" format="string" />
+    </declare-styleable>
+</resources>

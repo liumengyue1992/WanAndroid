@@ -2,7 +2,7 @@ package com.lmy.module_navigation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.lmy.base.BaseViewModel
-import com.lmy.module_home.bean.Article
+import com.lmy.module_common.bean.Article
 import com.lmy.module_navigation.bean.Navi
 import com.lmy.module_navigation.bean.Sys
 import com.lmy.module_navigation.repo.NavigationRepo

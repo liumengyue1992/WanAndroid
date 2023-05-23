@@ -2,7 +2,7 @@ package com.lmy.module_navigation.repo
 
 import androidx.lifecycle.MutableLiveData
 import com.lmy.base.BaseRepository
-import com.lmy.module_home.bean.Article
+import com.lmy.module_common.bean.Article
 import com.lmy.module_navigation.api.NavigationApi
 import com.lmy.module_navigation.bean.Navi
 import com.lmy.module_navigation.bean.Sys
