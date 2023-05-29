@@ -40,4 +40,10 @@ class HomeRepo(private val homeApi: HomeApi) : BaseRepository() {
         }, collectResult)
     }
 
+    suspend fun cancelCollect(id: Int, cancelCollectResult: MutableLiveData<String>) {
+        request(block = {
+            homeApi.cancelCollect(id)
+        },cancelCollectResult)
+    }
+
 }

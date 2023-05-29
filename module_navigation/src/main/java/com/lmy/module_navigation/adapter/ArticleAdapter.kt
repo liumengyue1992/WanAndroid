@@ -63,7 +63,19 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.itemView.setOnClickListener {
                 mOnItemClickListener?.invoke(diff.currentList[position])
             }
+            if (data.collect){
+                holder.binding.ivCollect.setImageResource(com.lmy.module_common.R.drawable.ic_like)
+            }else{
+                holder.binding.ivCollect.setImageResource(com.lmy.module_common.R.drawable.ic_like_not)
+            }
+            holder.binding.ivCollect.setOnClickListener {
+                onClickCollectListener?.invoke(data.id,position)
+            }
         }
+    }
+    private var onClickCollectListener: ((id: Int, position: Int) -> Unit)? = null
+    fun setOnClickCollectListener(listener: (id: Int, position: Int) -> Unit) {
+        this.onClickCollectListener = listener
     }
 
     // 条目点击事件

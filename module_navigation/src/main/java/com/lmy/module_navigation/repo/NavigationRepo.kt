@@ -37,4 +37,16 @@ class NavigationRepo(private val api: NavigationApi) : BaseRepository() {
             sysArticle
         )
     }
+
+    suspend fun collect(id: Int, collectResult: MutableLiveData<String>) {
+        request(block = {
+            api.collect(id)
+        }, collectResult)
+    }
+
+    suspend fun cancelCollect(id: Int, cancelCollectResult: MutableLiveData<String>) {
+        request(block = {
+            api.cancelCollect(id)
+        },cancelCollectResult)
+    }
 }

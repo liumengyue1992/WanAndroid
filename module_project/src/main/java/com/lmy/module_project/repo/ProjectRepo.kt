@@ -26,4 +26,17 @@ class ProjectRepo(private val projectApi: ProjectApi) : BaseRepository() {
     ) =
         request(block = { projectApi.getProjectList(page, pageSize, cid) }, data)
 
+
+
+    suspend fun collect(id: Int, collectResult: MutableLiveData<String>) {
+        request(block = {
+            projectApi.collect(id)
+        }, collectResult)
+    }
+
+    suspend fun cancelCollect(id: Int, cancelCollectResult: MutableLiveData<String>) {
+        request(block = {
+            projectApi.cancelCollect(id)
+        },cancelCollectResult)
+    }
 }

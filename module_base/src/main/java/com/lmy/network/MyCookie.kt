@@ -52,6 +52,15 @@ class MyCookie : CookieJar {
     }
 
     override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
-        DataStoreUtil.putData(COOKIE_LOGIN, gson.toJson(cookies, cookieType.type))
+
+        if (DataStoreUtil.getData(COOKIE_LOGIN,"").isNotEmpty()){
+            return
+        }
+        cookies.forEach {
+            if (it.toString().contains("loginUserName")){
+                DataStoreUtil.putData(COOKIE_LOGIN, gson.toJson(cookies, cookieType.type))
+                return@forEach
+            }
+        }
     }
 }

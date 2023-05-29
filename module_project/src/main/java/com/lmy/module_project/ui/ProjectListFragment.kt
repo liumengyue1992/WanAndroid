@@ -11,6 +11,7 @@ import com.lmy.module_project.adapter.ProjectAdapter
 import com.lmy.module_project.bean.ProjectDetail
 import com.lmy.module_project.databinding.FragmentProjectListBinding
 import com.lmy.module_project.viewmodel.ProjectViewModel
+import com.lmy.uitl.ToastUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -55,6 +56,15 @@ class ProjectListFragment : BaseVMFragment<FragmentProjectListBinding>() {
                     .withString(WEB_TITLE, title)
                     .navigation()
             }
+            setOnClickCollectListener { id, position ->
+                if (projectDetails[position].collect) {
+                    projectViewModel.cancelCollect(id)
+                } else {
+                    projectViewModel.collect(id)
+                }
+                projectDetails[position].collect = !projectDetails[position].collect
+                projectAdapter.notifyItemChanged(position)
+            }
         }
 
         binding.smartRefresh.setOnRefreshListener {
@@ -85,6 +95,12 @@ class ProjectListFragment : BaseVMFragment<FragmentProjectListBinding>() {
                 projectDetails.addAll(it.datas)
                 projectAdapter.setData(projectDetails)
             }
+        }
+        projectViewModel.collectResult.observe(this) {
+            ToastUtil.showShort("已收藏文章")
+        }
+        projectViewModel.cancelCollectResult.observe(this) {
+            ToastUtil.showShort("已取消收藏")
         }
     }
 

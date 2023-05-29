@@ -74,8 +74,14 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.itemView.setOnClickListener {
                 mOnItemClickListener?.invoke(diff.currentList[position])
             }
+            if (data.collect) {
+                holder.binding.ivCollect.setImageResource(com.lmy.module_common.R.drawable.ic_like)
+            } else {
+                holder.binding.ivCollect.setImageResource(com.lmy.module_common.R.drawable.ic_like_not)
+            }
+
             holder.binding.ivCollect.setOnClickListener {
-                mOnClickCollectListener?.invoke(diff.currentList[position].id)
+                mOnClickCollectListener?.invoke(diff.currentList[position].id, position)
             }
         }
     }
@@ -86,15 +92,15 @@ class ArticleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.mOnItemClickListener = onItemClickListener
     }
 
-    private var mOnClickCollectListener: ((id: Int) -> Unit)? = null
-    fun setOnClickCollectListener(listener: ((id: Int) -> Unit)) {
+    // 收藏点击事件
+    private var mOnClickCollectListener: ((id: Int, position: Int) -> Unit)? = null
+    fun setOnClickCollectListener(listener: ((id: Int, position: Int) -> Unit)) {
         this.mOnClickCollectListener = listener
     }
 
-
-    fun setData(article: List<ArticleDetail>) {
+    fun setData(article: List<ArticleDetail>?) {
         // AsyncListDiffer需要一个新数据，不然添加无效
-        diff.submitList(ArrayList(article))
+        diff.submitList(if (article != null) ArrayList(article) else null)
     }
 
     class ContentViewHolder(val binding: ItemHomeContentBinding) :

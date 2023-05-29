@@ -24,7 +24,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
     private val homeViewModel: HomeViewModel by viewModel()
     private lateinit var articleAdapter: ArticleAdapter
     private var currentPage = 0
-    private val articleList: MutableList<ArticleDetail> = arrayListOf()
+    private var articleList: MutableList<ArticleDetail> = arrayListOf()
     override fun getLayoutId(): Int = R.layout.fragment_home
 
     override fun initData() {
@@ -36,6 +36,7 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
             currentPage = 0
             it.setEnableLoadMore(true)
             articleList.clear()
+            articleAdapter.setData(null)
             homeViewModel.getHomeArticle(currentPage)
             homeViewModel.getHomeTopArticle()
         }
@@ -59,8 +60,14 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                     .withString(WEB_TITLE, it.title)
                     .navigation()
             }
-            setOnClickCollectListener {
-                homeViewModel.collect(it)
+            setOnClickCollectListener { id, position ->
+                if (articleList[position].collect) {
+                    homeViewModel.cancelCollect(id)
+                } else {
+                    homeViewModel.collect(id)
+                }
+                articleList[position].collect = !articleList[position].collect
+                articleAdapter.notifyItemChanged(position)
             }
         }
     }
@@ -88,8 +95,11 @@ class HomeFragment : BaseVMFragment<FragmentHomeBinding>() {
                 articleAdapter.setData(articleList)
             }
         }
-        homeViewModel.collectResult.observe(this){
+        homeViewModel.collectResult.observe(this) {
             ToastUtil.showShort("已收藏文章")
+        }
+        homeViewModel.cancelCollectResult.observe(this) {
+            ToastUtil.showShort("已取消收藏")
         }
     }
 

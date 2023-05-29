@@ -11,6 +11,7 @@ import coil.load
 import com.lmy.module_project.R
 import com.lmy.module_project.bean.ProjectDetail
 import com.lmy.module_project.databinding.ItemProjectBinding
+import okio.blackholeSink
 
 /**
  * @author: mengyue.liu
@@ -52,14 +53,28 @@ class ProjectAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             holder.binding.tvAuthor.text = data.author
             holder.binding.tvTime.text = data.niceDate
             holder.itemView.setOnClickListener {
-                onClickProjectItem?.invoke(data.link,data.title)
+                onClickProjectItem?.invoke(data.link, data.title)
+            }
+            if (data.collect){
+                holder.binding.ivCollect.setImageResource(com.lmy.module_common.R.drawable.ic_like)
+            }else{
+                holder.binding.ivCollect.setImageResource(com.lmy.module_common.R.drawable.ic_like_not)
+            }
+            holder.binding.ivCollect.setOnClickListener {
+                onClickCollectListener?.invoke(data.id,position)
             }
         }
     }
 
-    private var onClickProjectItem: ((link: String,title:String) -> Unit)? = null
+    private var onClickCollectListener: ((id: Int, position: Int) -> Unit)? = null
+    fun setOnClickCollectListener(listener: (id: Int, position: Int) -> Unit) {
+        this.onClickCollectListener = listener
+    }
 
-    fun setOnClickProjectItem(onClickProjectItemListener: (link: String,title:String) -> Unit) {
+
+    private var onClickProjectItem: ((link: String, title: String) -> Unit)? = null
+
+    fun setOnClickProjectItem(onClickProjectItemListener: (link: String, title: String) -> Unit) {
         this.onClickProjectItem = onClickProjectItemListener
     }
 

@@ -11,6 +11,7 @@ import com.lmy.module_navigation.R
 import com.lmy.module_navigation.adapter.ArticleAdapter
 import com.lmy.module_navigation.databinding.FragmentSysListBinding
 import com.lmy.module_navigation.viewmodel.NavigationViewModel
+import com.lmy.uitl.ToastUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -66,6 +67,15 @@ class SysListFragment : BaseVMFragment<FragmentSysListBinding>() {
                     .withString(WEB_LINK, it.link)
                     .navigation()
             }
+            setOnClickCollectListener { id, position ->
+                if (articleList[position].collect) {
+                    navigationViewMode.cancelCollect(id)
+                } else {
+                    navigationViewMode.collect(id)
+                }
+                articleList[position].collect = !articleList[position].collect
+                sysArticleAdapter.notifyItemChanged(position)
+            }
         }
     }
 
@@ -83,6 +93,13 @@ class SysListFragment : BaseVMFragment<FragmentSysListBinding>() {
                 articleList.addAll(it.datas)
                 sysArticleAdapter.setData(articleList)
             }
+        }
+
+        navigationViewMode.collectResult.observe(this) {
+            ToastUtil.showShort("已收藏文章")
+        }
+        navigationViewMode.cancelCollectResult.observe(this) {
+            ToastUtil.showShort("已取消收藏")
         }
     }
 }

@@ -19,6 +19,7 @@ class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
     var homeArticle = MutableLiveData<Article>()
     var homeTopArticle = MutableLiveData<List<ArticleDetail>>()
     val collectResult = MutableLiveData<String>()
+    val cancelCollectResult = MutableLiveData<String>()
 
     fun getBannerData() = launch { repo.getBanner(bannerList) }
 
@@ -31,6 +32,9 @@ class HomeViewModel(private val repo: HomeRepo) : BaseViewModel() {
 
     fun collect(id: Int) {
         launch { repo.collect(id,collectResult) }
+    }
 
+    fun cancelCollect(id:Int){
+        launch { repo.cancelCollect(id,cancelCollectResult) }
     }
 }

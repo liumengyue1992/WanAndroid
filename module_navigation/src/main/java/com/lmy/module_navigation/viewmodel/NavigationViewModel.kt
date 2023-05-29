@@ -17,6 +17,8 @@ class NavigationViewModel(private val repo: NavigationRepo) : BaseViewModel() {
     val naviList = MutableLiveData<List<Navi>>()
     val sysList = MutableLiveData<List<Sys>>()
     val sysArticleList = MutableLiveData<Article>()
+    val collectResult = MutableLiveData<String>()
+    val cancelCollectResult = MutableLiveData<String>()
     fun getNaviList() {
         launch { repo.getNaviList(naviList) }
     }
@@ -28,5 +30,13 @@ class NavigationViewModel(private val repo: NavigationRepo) : BaseViewModel() {
     private val pageSize = 20
     fun getSysArticleList(id: Int, page: Int) {
         launch { repo.getSysArticleList(id,page,pageSize,sysArticleList) }
+    }
+
+    fun collect(id: Int) {
+        launch { repo.collect(id,collectResult) }
+    }
+
+    fun cancelCollect(id:Int){
+        launch { repo.cancelCollect(id,cancelCollectResult) }
     }
 }

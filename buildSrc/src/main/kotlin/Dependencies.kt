@@ -44,6 +44,7 @@ object Libs {
     private const val flexBoxVersion = "3.0.0"
     private const val activityKtxVersion = "1.6.1"
     private const val fragmentKtxVersion = "1.6.1"
+    private const val persistentCookieJarVersion  = "v1.0.1"
 
     const val junit = "junit:junit:$junitVersion"
     const val testJunit = "androidx.test.ext:junit$testJunitVersion"
@@ -89,6 +90,9 @@ object Libs {
     // Activity ktx
     const val activityKtx = "androidx.activity:activity-ktx:$activityKtxVersion"
     const val fragmentKtx = "androidx.activity:activity-ktx:$fragmentKtxVersion"
+
+    // PersistentCookieJar for OkHttp3
+    const val persistentCookieJar = "com.github.franmontiel:PersistentCookieJar:$persistentCookieJarVersion"
 }
 /**
  * 使用buildSrc构建版本的缺点：

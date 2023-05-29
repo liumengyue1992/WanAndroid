@@ -64,4 +64,6 @@ dependencies {
     // BaseRepository中需要处理统一登录问题，故把Arouter下沉到module_base中
     implementation Libs.arouterApi
     kapt Libs.arouterCompiler
+
+    implementation Libs.persistentCookieJar
 }

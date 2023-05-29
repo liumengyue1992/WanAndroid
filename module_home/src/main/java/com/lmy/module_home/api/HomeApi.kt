@@ -36,5 +36,8 @@ interface HomeApi {
     @POST("lg/collect/{id}/json")
     suspend fun collect(@Path("id") id: Int): BaseResult<String>
 
+    // 取消收藏
+    @POST("lg/uncollect_originId/{id}/json")
+    suspend fun cancelCollect(@Path("id")id: Int):BaseResult<String>
 
 }

@@ -1,6 +1,10 @@
 package com.lmy.network
 
 import android.util.Log
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.lmy.base.BaseApplication
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -25,6 +29,10 @@ object RetrofitManager {
 
     private var retrofit: Retrofit
 
+    val cookieJar = PersistentCookieJar(
+        SetCookieCache(), SharedPrefsCookiePersistor(BaseApplication.mContext)
+    )
+
     init {
         val okHttpClient = OkHttpClient.Builder()
             .callTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -34,7 +42,7 @@ object RetrofitManager {
             .retryOnConnectionFailure(true)
             // .addInterceptor(HeaderIntercept())
             .followRedirects(false)
-            .cookieJar(MyCookie())
+            .cookieJar(cookieJar)
             .apply {
                 // if (BuildConfig.DEBUG) {
                 val loggingInterceptor = HttpLoggingInterceptor() { message ->
