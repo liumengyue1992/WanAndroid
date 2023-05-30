@@ -2,6 +2,7 @@
     <string name="app_name">module_mine</string>
     <string name="rank">排行榜</string>
     <string name="my_integral">我的积分</string>
+    <string name="my_integral_num">我的积分：%1$s</string>
     <string name="my_collect">我的收藏</string>
     <string name="open_project">开源项目</string>
     <string name="about_author">关于作者</string>
@@ -18,4 +19,5 @@
     <string name="go_register"><![CDATA[去注册 >>]]></string>
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
+    <string name="integral_record">积分记录</string>
 </resources>

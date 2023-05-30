@@ -2,6 +2,7 @@ package com.lmy.module_common.view
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
@@ -30,13 +31,14 @@ class TitleBar(context: Context, attrs: AttributeSet) : RelativeLayout(context, 
         val typeArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBar)
         val title = typeArray.getString(R.styleable.TitleBar_bar_title)
         val content = typeArray.getString(R.styleable.TitleBar_bar_content)
+        val funcIcon = typeArray.getDrawable(R.styleable.TitleBar_bar_func_icon)
         typeArray.recycle()
 
-        initView(title, content)
+        initView(title, content, funcIcon)
 
     }
 
-    private fun initView(title: String?, content: String?) {
+    private fun initView(title: String?, content: String?, funcIcon: Drawable?) {
         binding.ivBack.setOnClickListener {
             (context as Activity).finish()
         }
@@ -44,6 +46,17 @@ class TitleBar(context: Context, attrs: AttributeSet) : RelativeLayout(context, 
         title?.let {
             binding.tvTitle.text = it
         }
+        funcIcon?.let {
+            binding.ivFunc.setImageDrawable(it)
+            binding.ivFunc.setOnClickListener {
+                onClickFuncListener?.invoke()
+            }
+        }
+    }
+
+    private var onClickFuncListener: (() -> Unit)? = null
+    fun setOnClickFuncListener(listener: () -> Unit) {
+        this.onClickFuncListener = listener
     }
 
     /**

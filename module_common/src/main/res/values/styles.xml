@@ -19,5 +19,6 @@ Cause: java.nio.file.InvalidPathException: Illegal char <:> at index 45: com.lmy
     <declare-styleable name="TitleBar">
         <attr name="bar_title" format="string" />
         <attr name="bar_content" format="string" />
+        <attr name="bar_func_icon" format="reference" />
     </declare-styleable>
 </resources>

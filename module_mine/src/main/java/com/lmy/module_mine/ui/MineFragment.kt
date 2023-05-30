@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class MineFragment : BaseVMFragment<FragmentMineBinding>() {
     private val mineViewModel: MineViewModel by viewModel()
-
+    private lateinit var myPointItem:FuncItem
     override fun getLayoutId(): Int = R.layout.fragment_mine
 
     override fun onResume() {
@@ -43,15 +43,17 @@ class MineFragment : BaseVMFragment<FragmentMineBinding>() {
                     R.drawable.ic_rank,
                     getString(R.string.rank)
                 ).addOnClickListener {
-
+                    startActivity(Intent(context,RankActivity::class.java))
                 })
-            binding.llFunc.addView(
-                FuncItem(it).initFuncItem(
-                    R.drawable.ic_integral,
-                    getString(R.string.my_integral)
-                ).addOnClickListener {
+            myPointItem= FuncItem(it).initFuncItem(
+                R.drawable.ic_integral,
+                getString(R.string.my_integral)
+            )
+            myPointItem.addOnClickListener {
+                startActivity(Intent(context,IntegralRecordActivity::class.java))
+            }
+            binding.llFunc.addView(myPointItem)
 
-                })
             binding.llFunc.addView(
                 FuncItem(it).initFuncItem(
                     R.drawable.ic_collect,
@@ -104,6 +106,7 @@ class MineFragment : BaseVMFragment<FragmentMineBinding>() {
             startActivity(Intent(context, LoginActivity::class.java))
         }
 
+        mineViewModel.getMyPoints()
     }
 
     private fun showLogoutDialog() {
@@ -133,6 +136,9 @@ class MineFragment : BaseVMFragment<FragmentMineBinding>() {
     }
 
     override fun initObserver() {
+        mineViewModel.myPointsBean.observe(this){
+            myPointItem.updateDes(getString(R.string.my_integral_num,it.coinCount.toString()))
+        }
 
     }
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/tv_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:layout_marginStart="@dimen/dp_16"
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:maxLength="30"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toEndOf="@id/tv_rank"
+            tools:text="liumengyue" />
+
+        <TextView
+            android:gravity="center_vertical"
+            tools:text="10086"
+            android:id="@+id/tv_coinCount"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/color_d4237a"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_02"
+            android:background="@color/Grey200"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

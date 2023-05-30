@@ -10,6 +10,8 @@
         android:theme="@style/Theme.WanAndroid" >
 
         <activity android:name="com.lmy.module_mine.ui.LoginActivity"/>
+        <activity android:name="com.lmy.module_mine.ui.RankActivity"/>
+        <activity android:name="com.lmy.module_mine.ui.IntegralRecordActivity"/>
     </application>
 
 </manifest>

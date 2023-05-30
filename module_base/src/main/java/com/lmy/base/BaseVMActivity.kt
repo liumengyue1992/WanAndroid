@@ -1,5 +1,6 @@
 package com.lmy.base
 
+import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import com.lmy.annotation.PageId
 
@@ -21,10 +22,14 @@ abstract class BaseVMActivity<V : ViewDataBinding> : BaseActivity<V>() {
         }
         return cls.simpleName
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initObserver()
+    }
     
     override fun onResume() {
         super.onResume()
-        initObserver()
     }
     
     abstract fun initObserver()
